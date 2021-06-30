@@ -106,7 +106,8 @@ class c_news extends Controller
             // thêm ảnh mới
         }
         $articles->save();
-        $seo = seo::find($Request->seo_id);
+        
+        $seo = seo::find($articles->seo_id);
         $seo->title = $Request->title;
         $seo->description = $Request->description;
         $seo->keywords = $Request->keywords;

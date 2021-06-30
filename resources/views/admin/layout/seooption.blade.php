@@ -5,25 +5,25 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-12">
-                <div class="form-group custom-form-group">
+                <div class="form-group">
                     <label>Title</label>
-                    <input value="{{ isset($seo) ? $seo->title : '' }}" id="title" onkeyup="changetitle(this);" name='title' type="text" placeholder="70 characters left" class="form-control input-custom">
+                    <input value="{{ isset($seo) ? $seo->title : '' }}" id="title" onkeyup="changetitle(this);" name='title' type="text" placeholder="70 characters left" class="form-control">
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="form-group custom-form-group">
+                <div class="form-group">
                     <label >Description</label>
-                    <input value="{{ isset($seo) ? $seo->description : '' }}" id="description" onkeyup="change(this);" name='description' type="text" placeholder="170 characters left" class="form-control input-custom">
+                    <input value="{{ isset($seo) ? $seo->description : '' }}" id="description" onkeyup="change(this);" name='description' type="text" placeholder="170 characters left" class="form-control">
                 </div>
             </div>
             <div class="col-lg-9">
-                <div class="form-group custom-form-group">
+                <div class="form-group">
                     <label>keywords</label>
-                    <input value="{{ isset($seo) ? $seo->keywords : '' }}" name='keywords' type="text" placeholder="keywords ..." class="form-control input-custom">
+                    <input value="{{ isset($seo) ? $seo->keywords : '' }}" name='keywords' type="text" placeholder="keywords ..." class="form-control">
                 </div>
             </div>
             <div class="col-lg-3">
-                <div class="form-group custom-form-group">
+                <div class="form-group">
                     <label>Robots</label>
                     <select name='robot' class="form-control">
                         <option <?php if(isset($seo) && $seo->robot=='index, follow'){echo "selected";} ?> value="index, follow">index, follow</option>

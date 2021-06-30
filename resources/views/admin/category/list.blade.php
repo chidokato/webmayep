@@ -80,7 +80,7 @@
                         <td><a href="admin/category/edit/{{$val->id}}" >{{$str}}{{$val->name}}</a></td>
                         <td>{{$val->icon}} | {{$val->slug}}</td>
                         <td>{{$val->sku}}</td>
-                        <td><input type="text" id="view" value="{{$val->view}}" style="width: 100px" name="" class="form-control"></td>
+                        <td><input type="text" id="view" value="{{$val->view}}" name="" class="form-control cat_view"></td>
                         <td><input type="checkbox" <?php if($val->status == 'true'){echo "checked";} ?>></td>
                         <td>{{$val->user->name}}</td>
                         <td>

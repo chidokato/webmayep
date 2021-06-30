@@ -47,7 +47,7 @@ label {
 .form-control {height: 31px;line-height: 1;padding: .25rem .75rem;}
 .btn{line-height: 1;}
 :focus-visible {outline: none}
-.pt24px{padding-top: 24px !important;}
+.pt24px{line-height: 48px}
 .slug{
         border: none;
         width: 100%;
@@ -62,3 +62,6 @@ label {
 .input-custom:focus{box-shadow: none}
 .custom-form-group{	display: flex;}
 .custom-form-group label{border-bottom: 1px solid #ddd;line-height: 30px; padding-right: 15px; font-weight: bold;}
+.cat_view{height: 24px;width: 80px; border: none; border-bottom: solid 1px #ddd; border-radius: 0px}
+.cat_view:focus{border-color: #224abe; box-shadow: none;}
+.table td, .table th{padding: .3rem;}

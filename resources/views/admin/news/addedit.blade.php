@@ -64,7 +64,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label>Category</label>
-                    <select required name='cat_id' class="form-control kt_select2_1">
+                    <select name='cat_id' class="form-control kt_select2_1">
                         <option value="">-- Select --</option>
                         @if(isset($data))
                         <?php addeditcat ($category,0, $str='',$data['category_id']) ?>
