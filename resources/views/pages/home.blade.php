@@ -49,11 +49,17 @@
           <div class="card shadow-sm">
             <img src="data/product/300/{{$val->img}}">
             <div class="card-body">
-              <p class="card-text">{{$val->name}}</p>
+              <div class="card-text">{{$val->name}}</div>
+              <div>
+                Màu sắc: 
+                @foreach($mausac as $ms)
+                @if(in_array($ms->id, explode(',',$val->product->mausac_id))) {{$ms->name}} @endif
+                @endforeach
+              </div>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Mua ngay</button>
+                  <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> -->
                 </div>
                 <small class="text-muted">{{date('d/m/Y',strtotime($val->updated_at))}}</small>
               </div>

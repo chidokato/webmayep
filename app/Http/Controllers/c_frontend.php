@@ -44,9 +44,11 @@ class c_frontend extends Controller
 
     public function home()
     {
-        $articles = articles::orderBy('id','desc')->paginate(30);
+        $articles = articles::where('sort_by',1)->orderBy('id','desc')->paginate(30);
+        $mausac = mausac::all();
         return view('pages.home',[
             'articles' => $articles,
+            'mausac' => $mausac,
         ]);
     }
 
