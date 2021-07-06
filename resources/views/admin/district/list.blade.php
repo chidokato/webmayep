@@ -40,18 +40,20 @@
                     </div>
                 </div>
             </div>
+            
             <div class="card-body">
                 <table class="table">
                     <thead>
                         <tr>
                             <th>STT</th>
                             <th>
-                                <input onclick="toggle(this);" type="checkbox" value="" id="checkbox">
-                                <span></span>
-                                <!-- <button class="btn btn-danger btn-sm  ml-2 delall"><i class="la la-trash"></i> Dell all</button> -->
+                                <label><input onclick="toggle(this);" type="checkbox" id="checkbox"> Dell</label>
+                                
+                                <!-- <span></span>
+                                <button class="btn btn-danger btn-sm  ml-2 delall"><i class="la la-trash"></i> Dell all</button> -->
                             </th>
                             <th>Name</th>
-                            <th>Code</th>
+                            <th>Province</th>
                             <th>User</th>
                             <th>Status</th>
                             <th>Date</th>
@@ -63,13 +65,13 @@
                         <tr>
                             <td>{{$key+1}}</td>
                             <td>
-                                <input type="checkbox" value="{{$val->id}}">
+                                <input type="checkbox" name="foo" value="{{$val->id}}">
                             </td>
                             <td>
                                 {!! isset($val->img) ? '<img src="data/district/80/'.$val->img.'" class="thumbnail-img align-self-center" alt="" />' : '' !!}
-                                {{$val->name}}
+                                {{ $val->prefix }} {{$val->name}}
                             </td>
-                            <td>{{ $val->code }}</td>
+                            <td>{{ $val->province->name }}</td>
                             <td>{{ isset($val->user->name) ? $val->user->name : '' }}</td>
                             <td>
                                 <input type="checkbox" <?php if($val->status == 'true'){echo "checked";} ?> >

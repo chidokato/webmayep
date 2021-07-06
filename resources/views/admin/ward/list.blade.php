@@ -51,7 +51,8 @@
                                 <!-- <button class="btn btn-danger btn-sm  ml-2 delall"><i class="la la-trash"></i> Dell all</button> -->
                             </th>
                             <th>Name</th>
-                            <th>Code</th>
+                            <th>District</th>
+                            <th>Province</th>
                             <th>User</th>
                             <th>Status</th>
                             <th>Date</th>
@@ -67,9 +68,10 @@
                             </td>
                             <td>
                                 {!! isset($val->img) ? '<img src="data/ward/80/'.$val->img.'" class="thumbnail-img align-self-center" alt="" />' : '' !!}
-                                {{$val->name}}
+                                {{ $val->prefix }} {{$val->name}}
                             </td>
-                            <td>{{ $val->code }}</td>
+                            <td>{{ $val->district->name }}</td>
+                            <td>{{ $val->province->name }}</td>
                             <td>{{ isset($val->user->name) ? $val->user->name : '' }}</td>
                             <td>
                                 <input type="checkbox" <?php if($val->status == 'true'){echo "checked";} ?> >

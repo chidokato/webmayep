@@ -28,18 +28,13 @@ $(document).ready(function(){
     });
 });
 
+// checkbox all
 function toggle(source) {
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    for (var i = 0; i < checkboxes.length; i++) {
-        if (checkboxes[i] != source)
-            checkboxes[i].checked = source.checked;
-    }
+  checkboxes = document.getElementsByName('foo');
+  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes[i].checked = source.checked;
+  }
 }
-$(document).ready(function(){
-  $("#checkbox").click(function(){
-    $(".delall").toggleClass("block");
-  });
-});
 
 $(document).ready(function(){
     $("input#view").blur(function(){
