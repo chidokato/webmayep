@@ -65,3 +65,5 @@ label {
 .cat_view{height: 24px;width: 80px; border: none; border-bottom: solid 1px #ddd; border-radius: 0px}
 .cat_view:focus{border-color: #224abe; box-shadow: none;}
 .table td, .table th{padding: .3rem;}
+.pagination span, .pagination a{background: #2f56c8;margin-right: 5px;padding: 5px 10px;color: #fff;}
+.pagination span{background: #202d54;}
