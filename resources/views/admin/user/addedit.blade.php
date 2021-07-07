@@ -78,7 +78,7 @@
                 </div>
             </div>
         </div>
-        @include('admin.layout.seooption')
+        <!-- @include('admin.layout.seooption') -->
     </div>
     <div class="col-xl-3 col-lg-3">
         <div class="card shadow mb-4">
