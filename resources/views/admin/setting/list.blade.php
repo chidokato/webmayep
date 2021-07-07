@@ -11,16 +11,16 @@
 </div>
 <style type="text/css">
     .nav .active{text-decoration: underline;}
-    .nav li{margin-right: 20px}
+    .nav li{margin-right: 30px}
 </style>
 <div class="row">
     <div class="col-xl-12 col-lg-12">
         <div class="card shadow mb-4">
             <div class="card-header d-flex flex-row align-items-center justify-content-between">
                 <ul class="nav">
-                    <li><a class="active font-weight-bold text-primary" data-toggle="tab" href="#home">Information</a></li>
-                    <li><a class="font-weight-bold text-primary" data-toggle="tab" href="#menu1">Social</a></li>
-                    <li><a class="font-weight-bold text-primary" data-toggle="tab" href="#menu2">SEO option</a></li>
+                    <li><a class="active font-weight-bold text-primary" data-toggle="tab" href="#home">INFOMATION</a></li>
+                    <li><a class="font-weight-bold text-primary" data-toggle="tab" href="#menu1">SOCIAL</a></li>
+                    <li><a class="font-weight-bold text-primary" data-toggle="tab" href="#menu2">SEO OPTION</a></li>
                 </ul>
             </div>
             <div class="card-body">
@@ -39,11 +39,11 @@
                                 <label >Email</label>
                                 <input value="{!! old('email'), isset($data['email'])?$data['email']:null !!}" name='email' type="text" placeholder="email" class="form-control">
                             </div>
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-12 form-group">
                                 <label >Hotline</label>
                                 <input value="{!! old('hotline'), isset($data['hotline'])?$data['hotline']:null !!}" name='hotline' type="text" placeholder="hotline" class="form-control">
                             </div>
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-12 form-group">
                                 <label >Tel</label>
                                 <input value="{!! old('hotline1'), isset($data['hotline1'])?$data['hotline1']:null !!}" name='hotline1' type="text" placeholder="Tel" class="form-control">
                             </div>
