@@ -2,6 +2,8 @@ setTimeout(function() {
 	$('#hidden').fadeOut('fast');
 }, 2500); // <-- time in milliseconds
 
+function goBack() { window.history.back(); } // back history
+
 // upload images
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -18,6 +20,25 @@ function readURL(input) {
     }
 }
 // upload images
+
+// submit form
+// $(document).ready(function() {
+//     $('form').submit(function(event) {
+//         $.ajax({
+//             method: $(this).attr('method'),
+//             url: $(this).attr('action'),
+//             data: $(this).serialize(),
+//             success: function(datas){
+//                 // $('#alerts').html(datas);
+//             }
+//         }).done(function(response) {
+//             // Process the response here
+//         });
+//         event.preventDefault(); // <- avoid reloading
+//    });
+// });
+// submit form
+
 
 $(document).ready(function(){
     $("#sort_by").change(function(){

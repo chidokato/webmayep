@@ -159,7 +159,7 @@
                     </div>
                     <div class="col-md-1">
                         <label>Number</label>
-                        <input value=''  name='number' type="text" placeholder="..." class="form-control select_new">
+                        <input name='number' type="text" placeholder="..." class="form-control select_new">
                     </div>
                     <div class="col-md-2">
                         <label>Giá tiền</label>

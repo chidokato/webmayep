@@ -51,6 +51,7 @@ class c_banhang extends Controller
             $order->date = $Request->date;
             $order->channel_id = $Request->channel_id;
             $order->customer_id = $Request->customer_id;
+            $order->note = 0;
             $order->save();
             $order = order::findOrFail($order->id);
             $order->code = 'DH'.date('Ym', time()).$order->id;
@@ -64,12 +65,13 @@ class c_banhang extends Controller
         $banhang->articles_id = $Request->articles_id;
 		$banhang->mausac_id = $Request->mausac_id;
 		$banhang->size = $Request->size;
-		$banhang->number = $Request->number;
 		$banhang->price = $Request->price;
-		if($Request->number=='')$nhaphang->total = 1 * $Request->price;
-        else $nhaphang->total = $Request->number * $Request->price;
+		if($Request->number == ''){ $banhang->total = $Request->price; }
+        else { $banhang->total = $Request->price * $Request->number; }
+        $banhang->number = $Request->number;
     	$banhang->save();
-        return redirect('admin/banhang/edit/'.$order_id)->with('Alerts','Thành công');
+        // return redirect('admin/banhang/edit/'.$order_id)->with('Alerts','Thành công');
+        return redirect('admin/banhang/list')->with('Alerts','Thành công');
     }
 
     public function getedit($id)

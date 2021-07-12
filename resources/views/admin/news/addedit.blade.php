@@ -1,13 +1,14 @@
 @extends('admin.layout.index')
 @section('news') menu-item-active @endsection
 @section('content')
-@include('admin.errors.alerts')
-<form action="admin/news/{{ isset($data) ? 'edit/'.$data->id : 'add' }}" method="POST" enctype="multipart/form-data">
+<div id="alerts">@include('admin.errors.alerts')</div>
+<form action="admin/news/{{ isset($data) ? 'edit/'.$data->id : 'add' }}" method="POST" enctype="multipart/form-data" id="target">
 <input type="hidden" name="_token" value="{{csrf_token()}}" />
 <div class="text-right mb-3">
-    <button type="reset" class="btn-warning mr-2"><i class="fas fa-arrow-left"></i> Back</button>
+    <button onclick="goBack()" type="button" class="btn-warning mr-2"><i class="fas fa-arrow-left"></i> Back</button>
     <button type="reset" class="btn-danger mr-2"><i class="fas fa-sync"></i> Reset</button>
-    <button type="submit" class="btn-success"><i class="far fa-save"></i> Save</button>
+    <!-- <button type="submit" id="other" class="btn-info mr-2"><i class="far fa-save"></i> Save</button> -->
+    <button type="submit" id="save_back" class="btn-success"><i class="far fa-save"></i> Save & Back</button>
 </div>
 <div class="row">
     <div class="col-xl-9 col-lg-9">
@@ -106,6 +107,25 @@
     </div>
 </div>
 </form>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('form').submit(function(event) {
+            $.ajax({
+                method: $(this).attr('method'),
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                success: function(datas){
+                    // $('#loadchat').html(datas);
+                }
+            }).done(function(response) {
+                // Process the response here
+            });
+            event.preventDefault(); // <- avoid reloading
+       });
+    });
+</script>
+
 @endsection
 
 @section('function')
