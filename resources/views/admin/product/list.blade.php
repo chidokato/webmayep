@@ -42,7 +42,7 @@
             </div>
             <div class="card-body">
                 <table class="table">
-                    <form method="post" action="admin/category/delete_all"> <input type="hidden" name="_token" value="{{csrf_token()}}" />
+                    <form method="post" action="admin/product/delete_all"> <input type="hidden" name="_token" value="{{csrf_token()}}" />
                     <thead>
                         <tr>
                             <th style="position: relative; width: 25px;">

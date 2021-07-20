@@ -42,6 +42,7 @@ Route::group(['prefix'=>'admin','middleware'=>'adminlogin'],function(){
 		Route::post('edit/{id}','c_product@postedit');
 		Route::get('delete/{id}','c_product@getdelete');
 		Route::get('del/{id}/{imid}','c_product@delimages');
+		Route::post('delete_all','c_product@delete_all');
 	});
 	Route::group(['prefix'=>'news'],function(){
 		Route::get('list','c_news@getlist');

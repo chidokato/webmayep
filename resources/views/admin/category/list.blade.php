@@ -26,8 +26,8 @@
     <div class="col-xl-12 col-lg-12">
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                <div class="dropdown no-arrow">
+                <h6 class="m-0 font-weight-bold text-primary">Quản lý danh mục</h6>
+                <!-- <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                     </a>
@@ -38,7 +38,7 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="card-body">
                 <table class="table">
@@ -100,7 +100,7 @@
                         </td>
                         <td>{{date('d/m/Y',strtotime($val->created_at))}} / {{date('d/m/Y',strtotime($val->updated_at))}}</td>
                         <td>
-                            <a href="admin/category/double/{{$val->id}}" class="mr-2"><i class="far fa-copy"></i></a>
+                            <!-- <a href="admin/category/double/{{$val->id}}" class="mr-2"><i class="far fa-copy"></i></a> -->
                             <a href="admin/category/edit/{{$val->id}}" class="mr-2"><i class="fas fa-edit" aria-hidden="true"></i></a>
                             <a onclick="dell()" href="admin/category/delete/{{$val->id}}"><i class="fas fa-trash-alt"></i></a>
                         </td>

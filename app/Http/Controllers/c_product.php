@@ -125,7 +125,7 @@ class c_product extends Controller
         $this->validate($Request,['name' => 'Required'],[] );     
         $articles = articles::find($id);
         $articles->name = $Request->name;
-        $articles->slug = changeTitle($Request->name);
+        $articles->slug = $Request->slug;
         $articles->detail = $Request->detail;
         $articles->content = $Request->content;
         $articles->category_id = $Request->category_id;
@@ -166,6 +166,24 @@ class c_product extends Controller
         if(isset($Request->mausac)){$product->mausac_id = implode(',', $Request->mausac);}
         else{$product->mausac_id='';}
         $product->save();
+
+        // images
+        if($Request->hasFile('imgdetail')){
+            foreach ($Request->file('imgdetail') as $file) {
+                $images = new images();
+                if(isset($file)){
+                    $images->articles_id = $articles->id;
+                    $filename = $file->getClientOriginalName();
+                    while(file_exists("data/images/".$filename)){ $filename = str_random(4)."_".$filename; }
+                    $img = Image::make($file)->resize(1000, 600, function ($constraint) {$constraint->aspectRatio();})->save(public_path('data/images/'.$filename));
+                    $img = Image::make($file)->resize(100, 80, function ($constraint) {$constraint->aspectRatio();})->save(public_path('data/images/100/'.$filename));
+                    $images->img = $filename;
+                    $images->save();
+                }
+            }
+        }
+        // xóa ảnh chi tiết
+        
         
         return redirect('admin/product/edit/'.$id)->with('Alerts','Thành công');
     }
@@ -199,5 +217,39 @@ class c_product extends Controller
 
         $articles->delete();
         return redirect('admin/product/list')->with('Alerts','Thành công');
+    }
+    public function delete_all(Request $Request)
+    {
+        if (isset($Request->foo)) {
+            foreach($Request->foo as $id){
+                $articles = articles::find($id);
+                // del seo
+                $seo = seo::find($articles->seo_id);
+                $seo->delete();
+                // del product
+                $product = product::find($articles->product_id);
+                $product->delete();
+                // xóa ảnh
+                if(File::exists('data/product/'.$articles->img)) {
+                    File::delete('data/product/'.$articles->img);
+                    File::delete('data/product/300/'.$articles->img);
+                    File::delete('data/product/80/'.$articles->img);
+                }
+                // del images
+                if (isset($articles->images)) {
+                    foreach ($articles->images as $key => $value) {
+                        $images = images::find($value->id);
+                        if(File::exists('data/images/'.$images->img)) {
+                            File::delete('data/images/'.$images->img);
+                            File::delete('data/images/100/'.$images->img);
+                        }
+                        $images->delete();
+                    }
+                }
+
+                $articles->delete();
+            }
+        }
+        return redirect('admin/product/list')->with('Success','Success');
     }
 }

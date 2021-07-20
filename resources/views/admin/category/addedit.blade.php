@@ -32,8 +32,11 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Name</label>
-                                <input value="{{ isset($data) ? $data->name : '' }}" name="name" placeholder="Tên danh mục" type="text" class="form-control">
+                                <label style="display: flex;">Name</label> 
+                                <input value="{{ isset($data) ? $data->name : '' }}" name="name" placeholder="Name" type="text" class="form-control">
+                                {!! isset($data) ? '
+                                <input value="'.$data->slug.'" name="slug" placeholder="slug" type="text" class="slug">
+                                ' : '' !!}
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -46,21 +49,6 @@
                             <div class="form-group">
                                 <label>Icon</label>
                                 <input value="{{ isset($data) ? $data->icon : '' }}" name="icon" placeholder="Icon" type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {!! isset($data) ? '
-                                <label>Slug</label>
-                                <input value="'.$data->slug.'" name="slug" placeholder="slug" type="text" class="form-control">
-                                ' : '
-                                <label class="">Sort by</label>
-                                <select name="sort_by" class="form-control select2" id="sort_by">
-                                    <option value="1">Product</option>
-                                    <option value="2">News</option>
-                                    <option value="3">pages</option>
-                                </select>
-                                ' !!}
                             </div>
                         </div>
                         <div class="col-md-6">

@@ -84,7 +84,7 @@
                     @foreach($category as $val)
                     <div class="category">
                         <label> <input <?php if(isset($data) && $data->category_id == $val->id){echo "checked";} ?> type="radio" name="category_id" value="{{$val->id}}"> {{$val->name}} </label> 
-                        <label> <input <?php if(isset($data) && in_array($val->sku, explode(',',$data->category_sku))){echo "checked";} ?> type="checkbox" name="category_sku[]"  value="{{$val->sku}}"> Add </label> 
+                        <!-- <label> <input <?php if(isset($data) && in_array($val->sku, explode(',',$data->category_sku))){echo "checked";} ?> type="checkbox" name="category_sku[]"  value="{{$val->sku}}"> Add </label>  -->
                     </div>
                     @endforeach
                     <style type="text/css">
@@ -92,14 +92,14 @@
                     </style>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label>Màu sắc</label>
                     <select name='mausac[]' class="form-control select2" multiple="">
                         @foreach($mausac as $val)
                         <option <?php if(isset($data) && in_array($val->id, explode(',',$data->product->mausac_id))){echo 'selected';} ?> value="{{$val->id}}">{{$val->name}}</option>
                         @endforeach
                     </select>
-                </div>
+                </div> -->
                 
                 <!-- <div class="form-group">
                     <label>Number</label>
@@ -121,7 +121,7 @@
         </div>
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Images</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Ảnh đại diện</h6>
             </div>
             <div class="card-body">
                 <div class="file-upload">
@@ -135,11 +135,24 @@
             </div>
         </div>
         <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Chọn thêm ảnh</h6>
+            </div>
             <div class="card-body">
                 <div class="form-group">
-                    <input type="file" name="imgdetail[]" multiple class="form-control">
+                    <input type="file" name="imgdetail[]" multiple class="">
+                    <p><i style="color: red">Có thể chọn nhiều ảnh</i></p>
                 </div>
             </div>
+            @if(isset($data))
+            <div class="card-body">
+                <div class="row detail-img">
+                    @foreach($data->images as $val)
+                    <div class="col-md-6"><img src="data/images/100/{{$val->img}}"> <label> <input type="hidden" name="id_img_detail" value="{{ $val->id }}" /> <input type="checkbox" name="del_detail_img"> Xóa ảnh </label> </div>
+                    @endforeach
+                </div>
+            </div>
+            @endif
         </div>
     </div>
 </div>
