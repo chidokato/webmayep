@@ -2,6 +2,14 @@ setTimeout(function() {
 	$('#hidden').fadeOut('fast');
 }, 2500); // <-- time in milliseconds
 
+$(document).ready(function(){
+  $("#checkbox").click(function(){
+    $(".delall").toggle();
+  });
+});
+
+function dell() {alert("Bạn có chắc muốn xóa bản ghi!");}
+
 function goBack() { window.history.back(); } // back history
 
 // upload images
@@ -51,7 +59,7 @@ $(document).ready(function(){
 
 // checkbox all
 function toggle(source) {
-  checkboxes = document.getElementsByName('foo');
+  checkboxes = document.getElementsByName('foo[]');
   for(var i=0, n=checkboxes.length;i<n;i++) {
     checkboxes[i].checked = source.checked;
   }

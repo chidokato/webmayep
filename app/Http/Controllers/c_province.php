@@ -11,6 +11,7 @@ class c_province extends Controller
 {
     public function getlist()
     {
+        $count = province::get();
         $province = province::orderBy('id','desc')->paginate(50);
         $count = province::orderBy('id','desc')->count();
         // $province = province::orderBy('id','desc')->get();
@@ -20,6 +21,7 @@ class c_province extends Controller
         // 	$province->save();
         // }
     	return view('admin.province.list',[
+            'count'=>$count,
             'province'=>$province,
             'count'=>$count,
         ]);

@@ -42,14 +42,14 @@
             </div>
             <div class="card-body">
                 <table class="table">
+                    <form method="post" action="admin/category/delete_all"> <input type="hidden" name="_token" value="{{csrf_token()}}" />
                     <thead>
                         <tr>
+                            <th style="position: relative;">
+                                    <label class="container"><input onclick="toggle(this);" type="checkbox" id="checkbox"><span class="checkmark"></span></label>
+                                    <button type="submit" onclick="dell()" class="btn btn-danger btn-sm  ml-2 delall"><i class="la la-trash"></i> Dell all</button>
+                                </th>
                             <th>STT</th>
-                            <th>
-                                <input onclick="toggle(this);" type="checkbox" value="" id="checkbox">
-                                <span></span>
-                                <!-- <button class="btn btn-danger btn-sm  ml-2 delall"><i class="la la-trash"></i> Dell all</button> -->
-                            </th>
                             <th>Name</th>
                             <th>District</th>
                             <th>Province</th>
@@ -62,10 +62,10 @@
                     <tbody class="infinite-scroll">
                         @foreach($street as $key => $val)
                         <tr>
-                            <td>{{$key+1}}</td>
                             <td>
-                                <input type="checkbox" value="{{$val->id}}">
+                                <label class="container"><input type="checkbox" name="foo[]" value="{{$val->id}}"><span class="checkmark"></span></label>
                             </td>
+                            <td>{{count($street)}}</td>
                             <td>
                                 {!! isset($val->img) ? '<img src="data/street/80/'.$val->img.'" class="thumbnail-img align-self-center" alt="" />' : '' !!}
                                 {{$val->prefix}} {{$val->name}}
@@ -85,6 +85,7 @@
                         </tr>
                         @endforeach
                     </tbody>
+                    </form>
                 </table>
                 {{$street->links()}}
             </div>

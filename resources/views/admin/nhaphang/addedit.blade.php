@@ -177,15 +177,23 @@
                                 @foreach($supplier as $val)
                                 <option <?php if(isset($data)&&$data->supplier_id==$val->id){echo "selected";} ?> value="{{$val->id}}">{{$val->name}}</option>
                                 @endforeach
+                                <option value="0">Thêm mới</option>
                             </select>
                         </span>
                     </div>
                     <div class="col-md-12" id="showkhang" style="margin-top: 10px;">
                         @if(isset($data))
-                            Tên KH: {{$data->supplier->name}}<br>
-                            Mã KH: {{$data->supplier->code}}<br>
-                            SĐT: {{$data->supplier->phone}}<br>
-                            Địa chỉ: {{$data->supplier->address}}
+                        <ul class="showkhang">
+                            <li>
+                                <span>Tên: </span><input type="text" value="{{$data->supplier->name}}" name="">
+                            </li>
+                            <li>
+                                <span>SĐT: </span><input type="text" value="{{$data->supplier->phone}}" name="">
+                            </li>
+                            <li>
+                                <span>Địa chỉ: </span><input type="text" value="{{$data->supplier->address}}" name="">
+                            </li>
+                        </ul>
                         @endif
                     </div>
                 </div>
@@ -194,4 +202,10 @@
     </div>
 </div>
 </form>
+<style type="text/css">
+    .showkhang {padding: 0; margin: 0;}
+    .showkhang li{list-style: none; display: flex; margin-bottom: 10px;}
+    .showkhang li span{width: 20%;}
+    .showkhang input{border: none;border-bottom: 1px solid #ddd;width: 80%;}
+</style>
 @endsection

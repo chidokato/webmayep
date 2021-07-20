@@ -136,4 +136,28 @@ class c_category extends Controller
             return redirect('admin/category/list')->with('Success','Success');
         }
     }
+
+    public function delete_all(Request $Request)
+    {
+        if (isset($Request->foo)) {
+            foreach($Request->foo as $id){
+                $category = category::find($id);
+                $count = category::where('parent',$id)->count();
+                if($count > 0)
+                {
+                    return redirect('admin/category/list')->with('errors','Errors parent');
+                }
+                else
+                {
+                    if(File::exists('data/category/'.$category->img)) {
+                        File::delete('data/category/'.$category->img);
+                        File::delete('data/category/thumbnail/'.$category->img); }
+                    $seo = seo::find($category->seo_id);
+                    $seo->delete();
+                    $category->delete();
+                }
+            }
+        }
+        return redirect('admin/category/list')->with('Success','Success');
+    }
 }

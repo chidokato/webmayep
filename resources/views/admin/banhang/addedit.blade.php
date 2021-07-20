@@ -186,6 +186,7 @@
 								@foreach($customer as $val)
 								<option <?php if(isset($data)&&$data->customer_id==$val->id){echo "selected";} ?> value="{{$val->id}}">{{$val->name}}</option>
 								@endforeach
+                                <option value="0">Thêm mới !</option>
 	                        </select>
 						</span>
 	                </div>
