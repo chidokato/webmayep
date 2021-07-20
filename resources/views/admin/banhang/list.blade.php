@@ -70,7 +70,7 @@
 						@foreach($orders as $order)
 						<tr>
 							<td>{{$order->code}}</td>
-							<td>{{$order->date}}</td>
+							<td>{{ date("d/m/Y", strtotime($order->date)) }}</td>
 							<td> @if($order->channel_id) {{$order->channel->name}} @endif </td>
 							<td>{{$order->customer->name}}</td>
 							<!-- <td> </td> -->

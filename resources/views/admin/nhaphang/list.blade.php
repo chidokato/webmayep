@@ -69,7 +69,7 @@
                         @foreach($orders as $order)
                         <tr>
                             <td>{{$order->code}}</td>
-                            <td>{{$order->date}}</td>
+                            <td>{{ date("d/m/Y", strtotime($order->date)) }}</td>
                             <td>{{ isset($order->supplier->id)? $order->supplier->name : '' }}</td>
                             <td>{{count($order->nhaphang)}}</td>
                             <td><?php

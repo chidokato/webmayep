@@ -42,16 +42,17 @@
             </div>
             <div class="card-body">
                 <table class="table">
+                    <form method="post" action="admin/ward/delete_all"> <input type="hidden" name="_token" value="{{csrf_token()}}" />
                     <thead>
                         <tr>
+                            <th style="position: relative;">
+                                    <label class="container"><input onclick="toggle(this);" type="checkbox" id="checkbox"><span class="checkmark"></span></label>
+                                    <button type="submit" onclick="dell()" class="btn btn-danger btn-sm  ml-2 delall"><i class="la la-trash"></i> Dell all</button>
+                                </th>
                             <th>STT</th>
-                            <th>
-                                <input onclick="toggle(this);" type="checkbox" value="" id="checkbox">
-                                <span></span>
-                                <!-- <button class="btn btn-danger btn-sm  ml-2 delall"><i class="la la-trash"></i> Dell all</button> -->
-                            </th>
                             <th>Name</th>
-                            <th>Code</th>
+                            <th>District</th>
+                            <th>Province</th>
                             <th>User</th>
                             <th>Status</th>
                             <th>Date</th>
@@ -61,15 +62,16 @@
                     <tbody class="infinite-scroll">
                         @foreach($ward as $key => $val)
                         <tr>
+                            <td>
+                                <label class="container"><input type="checkbox" name="foo[]" value="{{$val->id}}"><span class="checkmark"></span></label>
+                            </td>
                             <td>{{$key+1}}</td>
                             <td>
-                                <input type="checkbox" value="{{$val->id}}">
-                            </td>
-                            <td>
                                 {!! isset($val->img) ? '<img src="data/ward/80/'.$val->img.'" class="thumbnail-img align-self-center" alt="" />' : '' !!}
-                                {{$val->name}}
+                                {{ $val->prefix }} {{$val->name}}
                             </td>
-                            <td>{{ $val->code }}</td>
+                            <td>{{ $val->district->name }}</td>
+                            <td>{{ $val->province->name }}</td>
                             <td>{{ isset($val->user->name) ? $val->user->name : '' }}</td>
                             <td>
                                 <input type="checkbox" <?php if($val->status == 'true'){echo "checked";} ?> >
@@ -83,6 +85,7 @@
                         </tr>
                         @endforeach
                     </tbody>
+                    </form>
                 </table>
                 {{$ward->links()}}
             </div>

@@ -42,10 +42,12 @@
             </div>
             <div class="card-body">
                 <table class="table">
+                    <form method="post" action="admin/category/delete_all"> <input type="hidden" name="_token" value="{{csrf_token()}}" />
                     <thead>
                         <tr>
-                            <th>
-                                <input onclick="toggle(this);" type="checkbox" value="" id="checkbox">
+                            <th style="position: relative; width: 25px;">
+                                <label class="container"><input onclick="toggle(this);" type="checkbox" id="checkbox"><span class="checkmark"></span></label>
+                                <button type="submit" onclick="dell()" class="btn btn-danger btn-sm  ml-2 delall"><i class="la la-trash"></i> Dell all</button>
                             </th>
                             <th></th>
                             <th>Name</th>
@@ -60,7 +62,7 @@
                         @foreach($product as $val)
                         <tr>
                             <td class="pt24px">
-                                <input type="checkbox" value="{{$val->id}}">
+                                <label class="container"><input type="checkbox" name="foo[]" value="{{$val->id}}"><span class="checkmark"></span></label>
                             </td>
                             <td>
                                 {!! isset($val->img) ? '<img style="width: 48px; height: 48px; object-fit: cover;" src="data/product/80/'.$val->img.'" class="thumbnail-img align-self-center" alt="" />' : '' !!}
@@ -84,6 +86,7 @@
                         </tr>
                         @endforeach
                     </tbody>
+                    </form>
                 </table>
             </div>
         </div>

@@ -42,23 +42,30 @@
             </div>
             <div class="card-body">
                 <table class="table">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Slug</th>
-                            <th>SKU</th>
-                            <th>View</th>
-                            <th>Status</th>
-                            <th>User</th>
-                            <th>Sort By</th>
-                            <th>date</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php dequycategory ($category,0,$str='',old('parent_id')); ?>  
-                    </tbody>
+                    <form method="post" action="admin/category/delete_all">
+                        <input type="hidden" name="_token" value="{{csrf_token()}}" />
+                        <thead>
+                            <tr>
+                                <th style="position: relative;">
+                                    <label class="container"><input onclick="toggle(this);" type="checkbox" id="checkbox"><span class="checkmark"></span></label>
+                                    <button type="submit" onclick="dell()" class="btn btn-danger btn-sm  ml-2 delall"><i class="la la-trash"></i> Dell all</button>
+                                </th>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Slug</th>
+                                <th>SKU</th>
+                                <th>View</th>
+                                <th>Status</th>
+                                <th>User</th>
+                                <th>Sort By</th>
+                                <th>date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php dequycategory ($category,0,$str='',old('parent_id')); ?>  
+                        </tbody>
+                    </form>
                 </table>
             </div>
         </div>
@@ -75,6 +82,9 @@
             { 
                 ?>
                     <tr class="editview" style="border-bottom: 1px solid #f3f6f9;">
+                        <td>
+                            <label class="container"><input type="checkbox" name="foo[]" value="{{$val->id}}"><span class="checkmark"></span></label>
+                        </td>
                         <input type="hidden" name="cid" value="{{$val->id}}" >
                         <td>{!! isset($val->img) ? '<img src="data/category/thumbnail/'.$val->img.'" class="thumbnail-img align-self-end" alt="">' : '' !!}</td>
                         <td><a href="admin/category/edit/{{$val->id}}" >{{$str}}{{$val->name}}</a></td>
@@ -92,7 +102,7 @@
                         <td>
                             <a href="admin/category/double/{{$val->id}}" class="mr-2"><i class="far fa-copy"></i></a>
                             <a href="admin/category/edit/{{$val->id}}" class="mr-2"><i class="fas fa-edit" aria-hidden="true"></i></a>
-                            <a href="admin/category/delete/{{$val->id}}"><i class="fas fa-trash-alt"></i></a>
+                            <a onclick="dell()" href="admin/category/delete/{{$val->id}}"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
                 <?php

@@ -31,6 +31,7 @@ Route::group(['prefix'=>'admin','middleware'=>'adminlogin'],function(){
 		Route::get('edit/{id}','c_category@getedit');
 		Route::post('edit/{id}','c_category@postedit');
 		Route::get('delete/{id}','c_category@getdelete');
+		Route::post('delete_all','c_category@delete_all');
 	});
 	Route::group(['prefix'=>'product'],function(){
 		Route::get('list','c_product@getlist');
@@ -51,7 +52,6 @@ Route::group(['prefix'=>'admin','middleware'=>'adminlogin'],function(){
 		Route::get('delete/{id}','c_news@getdelete');
 	});
 	Route::group(['prefix'=>'themes'],function(){
-		Route::get('list','c_themes@getlist');
 		Route::post('add','c_themes@postadd');
 		Route::get('edit/{id}','c_themes@getedit');
 		Route::post('edit/{id}','c_themes@postedit');

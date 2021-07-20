@@ -159,7 +159,7 @@
                     </div>
                     <div class="col-md-1">
                         <label>Number</label>
-                        <input value=''  name='number' type="text" placeholder="..." class="form-control select_new">
+                        <input name='number' type="text" placeholder="..." class="form-control select_new">
                     </div>
                     <div class="col-md-2">
                         <label>Giá tiền</label>
@@ -186,6 +186,7 @@
 								@foreach($customer as $val)
 								<option <?php if(isset($data)&&$data->customer_id==$val->id){echo "selected";} ?> value="{{$val->id}}">{{$val->name}}</option>
 								@endforeach
+                                <option value="0">Thêm mới !</option>
 	                        </select>
 						</span>
 	                </div>

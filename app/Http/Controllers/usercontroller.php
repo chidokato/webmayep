@@ -19,7 +19,7 @@ class usercontroller extends Controller
 
     public function getadd()
     {
-    	return view('admin.user.add');
+    	return view('admin.user.addedit');
     }
 
     public function postadd(Request $Request)
@@ -39,17 +39,13 @@ class usercontroller extends Controller
         $user->email = $Request->email.'@gmail.com';
         $user->password = bcrypt($Request->password);
         $user->permission = $Request->permission;
-        $user->title = $Request->title;
-        $user->description = $Request->description;
-        $user->keywords = $Request->keywords;
-    	$user->robot = $Request->robot;
         if ($Request->hasFile('img')) {
             $file = $Request->file('img');
             $filename = $file->getClientOriginalName();
             while(file_exists("data/user/".$filename)){$filename = str_random(4)."_".$filename;}
             $file->move('data/user', $filename);
             $user->avatar = $filename;
-        } // thêm ảnh
+        }
         $user->save();
 
         return redirect('admin/user/list')->with('Alerts','Thành công');
@@ -59,7 +55,7 @@ class usercontroller extends Controller
     public function getedit($id)
     {
         $user = user::find($id);
-    	return view('admin.user.add',['user'=>$user]);
+    	return view('admin.user.addedit',['user'=>$user]);
     }
 
     public function postedit(Request $Request,$id)
@@ -89,10 +85,6 @@ class usercontroller extends Controller
             ] );
             $user->password = bcrypt($Request->password);
         }
-        $user->title = $Request->title;
-        $user->description = $Request->description;
-        $user->keywords = $Request->keywords;
-        $user->robot = $Request->robot;
         if ($Request->hasFile('img')) {
             if(File::exists('data/user/'.$user->avatar)) { File::delete('data/user/'.$user->avatar); } // xóa ảnh
             $file = $Request->file('img');

@@ -26,7 +26,7 @@
     <div class="col-xl-12 col-lg-12">
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Province list ({{$count}} iteam)</h6>
                 <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -42,13 +42,12 @@
             </div>
             <div class="card-body">
                 <table class="table">
+                    <form method="post" action="admin/category/delete_all"> <input type="hidden" name="_token" value="{{csrf_token()}}" />
                     <thead>
                         <tr>
-                            <th>STT</th>
-                            <th>
-                                <input onclick="toggle(this);" type="checkbox" value="" id="checkbox">
-                                <span></span>
-                                <!-- <button class="btn btn-danger btn-sm  ml-2 delall"><i class="la la-trash"></i> Dell all</button> -->
+                            <th style="position: relative; width: 25px;">
+                                <label class="container"><input onclick="toggle(this);" type="checkbox" id="checkbox"><span class="checkmark"></span></label>
+                                <button type="submit" onclick="dell()" class="btn btn-danger btn-sm  ml-2 delall"><i class="la la-trash"></i> Dell all</button>
                             </th>
                             <th>Name</th>
                             <th>Code</th>
@@ -61,9 +60,8 @@
                     <tbody class="infinite-scroll">
                         @foreach($province as $key => $val)
                         <tr>
-                            <td>{{$key+1}}</td>
                             <td>
-                                <input type="checkbox" value="{{$val->id}}">
+                                <label class="container"><input type="checkbox" name="foo[]" value="{{$val->id}}"><span class="checkmark"></span></label>
                             </td>
                             <td>
                                 {!! isset($val->img) ? '<img src="data/province/80/'.$val->img.'" class="thumbnail-img align-self-center" alt="" />' : '' !!}
@@ -72,7 +70,7 @@
                             <td>{{ $val->code }}</td>
                             <td>{{ isset($val->user->name) ? $val->user->name : '' }}</td>
                             <td>
-                                <input type="checkbox" <?php if($val->status == 'true'){echo "checked";} ?> >
+                                <label class="container"><input <?php if($val->status == 'true'){echo "checked";} ?> type="checkbox" value="{{$val->id}}"><span class="checkmark"></span></label>
                             </td>
                             <td>
                                 {{date('d/m/Y',strtotime($val->created_at))}} / {{date('d/m/Y',strtotime($val->updated_at))}}
@@ -83,6 +81,7 @@
                         </tr>
                         @endforeach
                     </tbody>
+                    </form>
                 </table>
                 {{$province->links()}}
             </div>

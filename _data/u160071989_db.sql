@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 17, 2021 lúc 07:45 PM
--- Phiên bản máy phục vụ: 10.4.11-MariaDB
--- Phiên bản PHP: 7.2.31
+-- Máy chủ: 127.0.0.1:3306
+-- Thời gian đã tạo: Th7 08, 2021 lúc 09:30 AM
+-- Phiên bản máy phục vụ: 10.4.18-MariaDB-cll-lve
+-- Phiên bản PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `admin`
+-- Cơ sở dữ liệu: `u160071989_db`
 --
 
 -- --------------------------------------------------------
@@ -58,8 +59,8 @@ INSERT INTO `articles` (`id`, `category_id`, `category_sku`, `user_id`, `seo_id`
 (193, 119, 'F2v7YulJ,nBhV0QQg,c8noqADM,m6LCnhVX,yP4maZdw,WvtKuymI', 1, 62, 29, '1', 'ElYXaYHx', 'Giày chun 381', 'z2476749424303_79603e7504758fda84481d34bc6b69ba.jpg', 50, NULL, NULL, 'true', NULL, NULL, 'giay-chun-381', '2021-05-31 15:27:22', '2021-06-17 14:00:34'),
 (196, 119, NULL, 1, 73, 32, '1', 'zcO9ul6U', 'Sandal 669', 'z2409021978692_7f38f3a6d0a3b1104a46825eabb9a172.jpg', 50, NULL, NULL, 'true', NULL, NULL, 'sandal-669', '2021-06-17 14:26:09', '2021-06-17 14:26:09'),
 (197, 119, '', 1, 74, 33, '1', 'zNuFto64', 'Sandal 601', 'z2437574564005_91b5f9cc50fa53e0859711ae5b384e58.jpg', 50, NULL, NULL, 'true', NULL, NULL, 'sandal-601', '2021-06-17 14:27:26', '2021-06-17 14:27:47'),
-(198, 120, NULL, 1, 75, 34, '1', '83i7Imsd', 'Sandal 712', 'z2558842732536_ce700cac4ec66a4f5fffd035584802d3.jpg', 50, NULL, NULL, 'true', NULL, NULL, 'sandal-712', '2021-06-17 14:29:53', '2021-06-17 14:29:53'),
-(199, NULL, NULL, 1, 76, 35, '1', 'HcXhQKUt', 'Sandal 302', NULL, 50, NULL, NULL, 'true', NULL, NULL, 'sandal-302', '2021-06-17 14:30:36', '2021-06-17 14:30:36');
+(198, 120, '', 1, 75, 34, '1', '83i7Imsd', 'Sandal 712', 'z2558842732536_ce700cac4ec66a4f5fffd035584802d3.jpg', 50, NULL, NULL, 'true', NULL, 'Chúng tôi cần bán hệ thống nhà xưởng Zamil và đất công nghiệp 50 năm.\r\nChúng tôi cần bán hệ thống nhà xưởng Zamil và đất công nghiệp 50 năm.\r\nChúng tôi cần bán hệ thống nhà xưởng Zamil và đất công nghiệp 50 năm.', 'sandal-712', '2021-06-17 14:29:53', '2021-06-28 04:02:06'),
+(199, NULL, '', 1, 76, 35, '1', 'HcXhQKUt', 'Sandal 302', NULL, 50, NULL, NULL, 'true', NULL, NULL, 'sandal-302', '2021-06-17 14:30:36', '2021-06-18 04:24:14');
 
 -- --------------------------------------------------------
 
@@ -137,7 +138,8 @@ INSERT INTO `category` (`id`, `user_id`, `seo_id`, `sku`, `name`, `img`, `sort_b
 (124, 1, 69, 'nBhV0QQg', 'Dép lê', NULL, 1, 'dep-le', 0, 5, '2', 'true', NULL, 50, NULL, '2021-06-06 15:08:08', '2021-06-07 14:27:02'),
 (125, 1, 70, 'F2v7YulJ', 'Giày búp bê', NULL, 1, 'giay-bup-be', 0, 7, '2', 'true', NULL, 50, NULL, '2021-06-06 15:08:18', '2021-06-07 14:27:12'),
 (126, 1, 71, 'PJFIUG1b', 'Cộng tác viên / Dropship', NULL, 3, 'cong-tac-vien-dropship', 0, NULL, NULL, 'true', NULL, 50, NULL, '2021-06-06 15:44:33', '2021-06-06 15:44:33'),
-(127, 1, 72, 'qDyOr240', 'Hướng dẫn đặt hàng', NULL, 3, 'huong-dan-dat-hang', 0, NULL, NULL, 'true', NULL, 50, NULL, '2021-06-06 16:12:05', '2021-06-06 16:12:05');
+(127, 1, 72, 'qDyOr240', 'Hướng dẫn đặt hàng', NULL, 3, 'huong-dan-dat-hang', 0, NULL, NULL, 'true', NULL, 50, NULL, '2021-06-06 16:12:05', '2021-06-06 16:12:05'),
+(128, 1, 77, 'uYRiYupR', 'Tin tức', NULL, 2, 'tin-tuc', 0, NULL, NULL, 'true', NULL, 50, NULL, '2021-06-28 04:01:19', '2021-06-28 04:01:19');
 
 -- --------------------------------------------------------
 
@@ -1135,7 +1137,7 @@ INSERT INTO `product` (`id`, `mausac_id`, `price`, `oldprice`, `saleoff`, `numbe
 (32, '1,8', NULL, NULL, NULL, NULL, '2021-06-17 14:26:09', '2021-06-17 14:26:31'),
 (33, '', NULL, NULL, NULL, NULL, '2021-06-17 14:27:26', '2021-06-17 14:27:47'),
 (34, '6,5', NULL, NULL, NULL, NULL, '2021-06-17 14:29:53', '2021-06-17 14:29:53'),
-(35, NULL, NULL, NULL, NULL, NULL, '2021-06-17 14:30:36', '2021-06-17 14:30:36');
+(35, '', NULL, NULL, NULL, NULL, '2021-06-17 14:30:36', '2021-06-18 04:24:14');
 
 -- --------------------------------------------------------
 
@@ -1251,18 +1253,18 @@ INSERT INTO `quanlykho` (`id`, `articles_id`, `mausac_id`, `form_id`, `size`, `t
 (145, 193, 1, 2, 31, '5', NULL, '2021-06-17 14:01:26', '2021-06-17 14:22:39'),
 (146, 193, 1, 2, 32, '3', NULL, '2021-06-17 14:01:26', '2021-06-17 14:22:39'),
 (147, 193, 1, 2, 33, NULL, NULL, '2021-06-17 14:01:26', '2021-06-17 14:22:39'),
-(148, 193, 2, 2, 28, '2', NULL, '2021-06-17 14:01:26', '2021-06-17 14:23:28'),
-(149, 193, 2, 2, 29, '1', NULL, '2021-06-17 14:01:26', '2021-06-17 14:23:28'),
-(150, 193, 2, 2, 30, '3', NULL, '2021-06-17 14:01:26', '2021-06-17 14:23:28'),
-(151, 193, 2, 2, 31, NULL, NULL, '2021-06-17 14:01:26', '2021-06-17 14:15:16'),
+(148, 193, 2, 2, 28, '2', NULL, '2021-06-17 14:01:26', '2021-06-18 13:32:08'),
+(149, 193, 2, 2, 29, '1', NULL, '2021-06-17 14:01:26', '2021-06-18 13:32:08'),
+(150, 193, 2, 2, 30, '3', NULL, '2021-06-17 14:01:26', '2021-06-18 13:32:08'),
+(151, 193, 2, 2, 31, '2', NULL, '2021-06-17 14:01:26', '2021-06-18 04:28:08'),
 (152, 193, 2, 2, 32, NULL, NULL, '2021-06-17 14:01:27', '2021-06-17 14:15:16'),
-(153, 193, 2, 2, 33, '2', NULL, '2021-06-17 14:01:27', '2021-06-17 14:23:28'),
-(154, 193, 1, 3, 34, NULL, NULL, '2021-06-17 14:01:47', '2021-06-17 14:22:39'),
-(155, 193, 1, 3, 35, NULL, NULL, '2021-06-17 14:01:47', '2021-06-17 14:22:39'),
-(156, 193, 1, 3, 36, NULL, NULL, '2021-06-17 14:01:47', '2021-06-17 14:22:39'),
-(157, 193, 1, 3, 37, '2', NULL, '2021-06-17 14:01:47', '2021-06-17 14:17:01'),
+(153, 193, 2, 2, 33, '3', NULL, '2021-06-17 14:01:27', '2021-06-18 04:28:08'),
+(154, 193, 1, 3, 34, NULL, NULL, '2021-06-17 14:01:47', '2021-06-18 13:32:08'),
+(155, 193, 1, 3, 35, NULL, NULL, '2021-06-17 14:01:47', '2021-06-18 13:32:08'),
+(156, 193, 1, 3, 36, NULL, NULL, '2021-06-17 14:01:47', '2021-06-18 13:32:08'),
+(157, 193, 1, 3, 37, '2', NULL, '2021-06-17 14:01:47', '2021-06-18 13:32:08'),
 (158, 193, 1, 3, 38, NULL, NULL, '2021-06-17 14:01:48', '2021-06-17 14:15:16'),
-(159, 193, 1, 3, 39, '3', NULL, '2021-06-17 14:01:48', '2021-06-17 14:17:01'),
+(159, 193, 1, 3, 39, '3', NULL, '2021-06-17 14:01:48', '2021-06-18 13:32:08'),
 (160, 193, 2, 3, 34, '3', NULL, '2021-06-17 14:01:48', '2021-06-17 14:23:28'),
 (161, 193, 2, 3, 35, '2', NULL, '2021-06-17 14:01:48', '2021-06-17 14:23:28'),
 (162, 193, 2, 3, 36, '1', NULL, '2021-06-17 14:01:48', '2021-06-17 14:23:28'),
@@ -1328,7 +1330,8 @@ INSERT INTO `seo` (`id`, `title`, `description`, `keywords`, `robot`, `created_a
 (73, NULL, NULL, NULL, 'index, follow', '2021-06-17 07:26:09', '2021-06-17 07:26:09'),
 (74, NULL, NULL, NULL, 'index, follow', '2021-06-17 07:27:26', '2021-06-17 07:27:26'),
 (75, NULL, NULL, NULL, 'index, follow', '2021-06-17 07:29:53', '2021-06-17 07:29:53'),
-(76, NULL, NULL, NULL, 'index, follow', '2021-06-17 07:30:36', '2021-06-17 07:30:36');
+(76, NULL, NULL, NULL, 'index, follow', '2021-06-17 07:30:36', '2021-06-17 07:30:36'),
+(77, NULL, NULL, NULL, 'index, follow', '2021-06-28 04:01:19', '2021-06-28 04:01:19');
 
 -- --------------------------------------------------------
 
@@ -33202,7 +33205,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `password`, `permission`, `avatar`, `your_name`, `email`, `birthday`, `facebook`, `phone`, `created_at`, `updated_at`, `remember_token`) VALUES
-(1, 'Admin', '$2y$10$zOy1EGPDyee87rGqheVTtegITNloa/Aqe6XWWLxJ1xTIKGClUE44q', 0, 'call_center.png', NULL, 'admin@gmail.com', NULL, NULL, '0977572947', '2018-06-05 11:56:18', '2019-05-18 23:18:13', 'LPBz53gVwWtnep5XFDhTShQ1M0U4bXInyRIyTQxWTGA7QlX6r7JcT9fXlKXA');
+(1, 'Admin', '$2y$10$zOy1EGPDyee87rGqheVTtegITNloa/Aqe6XWWLxJ1xTIKGClUE44q', 0, 'call_center.png', NULL, 'admin@gmail.com', NULL, NULL, '0977572947', '2018-06-05 11:56:18', '2019-05-18 23:18:13', 'KItfA1bhQgV5dU8oO7u9PNtXvOeEQMahyJQD0tXe7NKYM8KpU98S7CtRLigz');
 
 -- --------------------------------------------------------
 
@@ -44685,7 +44688,7 @@ ALTER TABLE `banhang`
 -- AUTO_INCREMENT cho bảng `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT cho bảng `channel`
@@ -44763,7 +44766,7 @@ ALTER TABLE `quanlykho`
 -- AUTO_INCREMENT cho bảng `seo`
 --
 ALTER TABLE `seo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT cho bảng `setting`

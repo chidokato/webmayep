@@ -2,6 +2,16 @@ setTimeout(function() {
 	$('#hidden').fadeOut('fast');
 }, 2500); // <-- time in milliseconds
 
+$(document).ready(function(){
+  $("#checkbox").click(function(){
+    $(".delall").toggle();
+  });
+});
+
+function dell() {alert("Bạn có chắc muốn xóa bản ghi!");}
+
+function goBack() { window.history.back(); } // back history
+
 // upload images
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -19,6 +29,25 @@ function readURL(input) {
 }
 // upload images
 
+// submit form
+// $(document).ready(function() {
+//     $('form').submit(function(event) {
+//         $.ajax({
+//             method: $(this).attr('method'),
+//             url: $(this).attr('action'),
+//             data: $(this).serialize(),
+//             success: function(datas){
+//                 // $('#alerts').html(datas);
+//             }
+//         }).done(function(response) {
+//             // Process the response here
+//         });
+//         event.preventDefault(); // <- avoid reloading
+//    });
+// });
+// submit form
+
+
 $(document).ready(function(){
     $("#sort_by").change(function(){
         var sort_by = $(this).val();
@@ -28,18 +57,13 @@ $(document).ready(function(){
     });
 });
 
+// checkbox all
 function toggle(source) {
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    for (var i = 0; i < checkboxes.length; i++) {
-        if (checkboxes[i] != source)
-            checkboxes[i].checked = source.checked;
-    }
+  checkboxes = document.getElementsByName('foo[]');
+  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes[i].checked = source.checked;
+  }
 }
-$(document).ready(function(){
-  $("#checkbox").click(function(){
-    $(".delall").toggleClass("block");
-  });
-});
 
 $(document).ready(function(){
     $("input#view").blur(function(){
