@@ -184,7 +184,24 @@ $(document).ready(function(){
         });
     });
 });
+// sửa tồn kho
 
+// sản phẩm
+$(document).ready(function(){
+    $("button#del_img_detail").click(function(){
+        var id = $(this).parents('#detail_img').find('input[id="id_img_detail"]').val();
+        alert(id);
+        $.ajax({
+            url: 'admin/ajax/del_img_detail/'+id,
+            type: 'GET',
+            cache: false,
+            data: {
+                "id":id
+            },
+        });
+    });
+});
+// end sản phẩm
 
 
 

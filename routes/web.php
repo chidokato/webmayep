@@ -145,7 +145,8 @@ Route::group(['prefix'=>'admin','middleware'=>'adminlogin'],function(){
 		Route::get('delchannel/{id}','c_ajax@delchannel');
 		Route::get('add_banhang/{id}','c_ajax@delchannel');
 
-
+		// product
+		Route::get('del_img_detail/{id}','c_ajax@del_img_detail');
 		
 
 	});

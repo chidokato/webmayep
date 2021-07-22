@@ -167,7 +167,7 @@ class c_product extends Controller
         else{$product->mausac_id='';}
         $product->save();
 
-        // images
+        // thêm ảnh chi tiết
         if($Request->hasFile('imgdetail')){
             foreach ($Request->file('imgdetail') as $file) {
                 $images = new images();
@@ -182,8 +182,6 @@ class c_product extends Controller
                 }
             }
         }
-        // xóa ảnh chi tiết
-        
         
         return redirect('admin/product/edit/'.$id)->with('Alerts','Thành công');
     }

@@ -102,6 +102,19 @@ class c_ajax extends Controller
     }
     // bán hàng
 
+    // product
+    public function del_img_detail($id)
+    {
+        if(Request::ajax()){
+            $images = images::find($id);
+            if(File::exists('data/images/'.$images->img)) {
+                File::delete('data/images/'.$images->img);
+                File::delete('data/images/100/'.$images->img);
+            }
+            $images->delete();
+        }
+    }
+    // product
 
 
 

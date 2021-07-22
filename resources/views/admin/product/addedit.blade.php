@@ -140,7 +140,7 @@
             </div>
             <div class="card-body">
                 <div class="form-group">
-                    <input type="file" name="imgdetail[]" multiple class="">
+                    <input type="file" name="imgdetail[]" multiple class="form-control">
                     <p><i style="color: red">Có thể chọn nhiều ảnh</i></p>
                 </div>
             </div>
@@ -148,7 +148,11 @@
             <div class="card-body">
                 <div class="row detail-img">
                     @foreach($data->images as $val)
-                    <div class="col-md-6"><img src="data/images/100/{{$val->img}}"> <label> <input type="hidden" name="id_img_detail" value="{{ $val->id }}" /> <input type="checkbox" name="del_detail_img"> Xóa ảnh </label> </div>
+                    <div class="col-md-6" id="detail_img">
+                        <img src="data/images/100/{{$val->img}}">
+                        <button type="button" id="del_img_detail"> Xóa ảnh </button>
+                        <input type="hidden" name="id_img_detail" id="id_img_detail" value="{{$val->id}}" />
+                    </div>
                     @endforeach
                 </div>
             </div>
