@@ -13,7 +13,7 @@
     <div class="col-xl-9 col-lg-9">
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Information</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Thông tin</h6>
                 <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -31,7 +31,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label style="display: flex;">Name</label> 
+                            <label style="display: flex;">Tên sản phẩm</label> 
                             <input value="{{ isset($data) ? $data->name : '' }}" name="name" placeholder="Name" type="text" class="form-control">
                             {!! isset($data) ? '
                             <input value="'.$data->slug.'" name="slug" placeholder="slug" type="text" class="slug">
@@ -41,13 +41,13 @@
                     
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label>Detail</label>
+                            <label>Mô tả ngắn</label>
                             <textarea rows="3" name="detail" class="form-control">{{ isset($data) ? $data->detail : '' }}</textarea>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label>Content</label>
+                            <label>Nội dung chi tết</label>
                             <textarea name="content" class="form-control ckeditor" id="ckeditor">{{ isset($data) ? $data->content : '' }}</textarea>
                         </div>
                     </div>
@@ -62,9 +62,9 @@
                 <h6 class="m-0 font-weight-bold text-primary">Tùy chọn</h6>
             </div>
             <div class="card-body">
-                <!-- <div class="form-group">
+                <div class="form-group">
                     <label>Category</label>
-                    <select name='cat_id' class="form-control select2">
+                    <select name='category_id' class="form-control select2">
                         <option value="">-- Select --</option>
                         @if(isset($data))
                         <?php addeditcat ($category,0, $str='',$data['category_id']) ?>
@@ -72,31 +72,31 @@
                         <?php addeditcat ($category,0,$str='',old('parent')); ?>
                         @endif
                     </select>
-                </div> -->
+                </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group"> -->
                     <!-- <select name='category_sku[]' class="form-control select2" multiple="">
                         <option value="">-- Select --</option>
                         @foreach($category as $val)
-                        <option <?php if(isset($data) && in_array($val->sku, explode(',',$data->category_sku))){echo 'selected';} ?> value="{{$val->sku}}">{{$val->name}}</option>
+                        <option <?php //if(isset($data) && in_array($val->sku, explode(',',$data->category_sku))){echo 'selected';} ?> value="{{$val->sku}}">{{$val->name}}</option>
                         @endforeach
                     </select> -->
-                    @foreach($category as $val)
-                    <div class="category">
-                        <label> <input <?php if(isset($data) && $data->category_id == $val->id){echo "checked";} ?> type="radio" name="category_id" value="{{$val->id}}"> {{$val->name}} </label> 
-                        <!-- <label> <input <?php if(isset($data) && in_array($val->sku, explode(',',$data->category_sku))){echo "checked";} ?> type="checkbox" name="category_sku[]"  value="{{$val->sku}}"> Add </label>  -->
-                    </div>
+                    <!-- @foreach($category as $val) -->
+                    <!-- <div class="category">
+                        <label> <input <?php // if(isset($data) && $data->category_id == $val->id){echo "checked";} ?> type="radio" name="category_id" value="{{$val->id}}"> {{$val->name}} </label>  -->
+                        <!-- <label> <input <?php // if(isset($data) && in_array($val->sku, explode(',',$data->category_sku))){echo "checked";} ?> type="checkbox" name="category_sku[]"  value="{{$val->sku}}"> Add </label>  -->
+                    <!-- </div>
                     @endforeach
                     <style type="text/css">
                         .category{display: flex; justify-content: space-between; align-items: baseline;    border-bottom: 1px solid #ddd; padding: 5px 0px;}
                     </style>
-                </div>
+                </div> -->
 
                 <!-- <div class="form-group">
                     <label>Màu sắc</label>
                     <select name='mausac[]' class="form-control select2" multiple="">
                         @foreach($mausac as $val)
-                        <option <?php if(isset($data) && in_array($val->id, explode(',',$data->product->mausac_id))){echo 'selected';} ?> value="{{$val->id}}">{{$val->name}}</option>
+                        <option <?php //if(isset($data) && in_array($val->id, explode(',',$data->product->mausac_id))){echo 'selected';} ?> value="{{$val->id}}">{{$val->name}}</option>
                         @endforeach
                     </select>
                 </div> -->
@@ -105,11 +105,11 @@
                     <label>Number</label>
                     <input value="{{ isset($data->product->number) ? $data->product->number : '' }}" type="text" name="number" class="form-control" placeholder="...">
                 </div> -->
-                <!-- <div class="form-group">
-                    <label>Price</label>
+                <div class="form-group">
+                    <label>Giá bán</label>
                     <input value="{{ isset($data->product->price) ? $data->product->price : '' }}" type="text" name="price" class="form-control" placeholder="...">
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label>OldPrice</label>
                     <input value="{{ isset($data->product->oldprice) ? $data->product->oldprice : '' }}" type="text" name="oldprice" class="form-control" placeholder="...">
                 </div>
@@ -136,12 +136,12 @@
         </div>
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Chọn thêm ảnh</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Chọn nhiều ảnh</h6>
             </div>
             <div class="card-body">
                 <div class="form-group">
                     <input type="file" name="imgdetail[]" multiple class="form-control">
-                    <p><i style="color: red">Có thể chọn nhiều ảnh</i></p>
+                    <p>Nhấn giữ <i style="color: red">Ctrl</i> để chọn nhiều ảnh !</p>
                 </div>
             </div>
             @if(isset($data))
