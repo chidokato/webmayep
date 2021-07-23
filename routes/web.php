@@ -163,3 +163,4 @@ Route::get('{curl}','c_frontend@category');
 Route::get('{curl}/{arurl}','c_frontend@articles');
 Route::POST('dang-ky','c_frontend@dangky');
 Route::POST('search','c_frontend@post_search');
+// web may ep
