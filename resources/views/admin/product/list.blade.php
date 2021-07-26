@@ -26,7 +26,7 @@
     <div class="col-xl-12 col-lg-12">
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Danh sách sản phẩm</h6>
                 <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -51,35 +51,36 @@
                             </th>
                             <th></th>
                             <th>Name</th>
+                            <th>Status</th>
                             <th>Category</th>
                             <th>User</th>
                             <th>Date</th>
-                            <th>Status</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($product as $val)
-                        <tr>
-                            <td class="pt24px">
+                        <tr id="product">
+                            <input type="hidden" id="id" value="{{$val->id}}" />
+                            <td>
                                 <label class="container"><input type="checkbox" name="foo[]" value="{{$val->id}}"><span class="checkmark"></span></label>
                             </td>
                             <td>
                                 {!! isset($val->img) ? '<img style="width: 48px; height: 48px; object-fit: cover;" src="data/product/80/'.$val->img.'" class="thumbnail-img align-self-center" alt="" />' : '' !!}
                             </td>
-                            <td class="pt24px">
+                            <td>
                                 {{$val->name}}
                             </td>
-                            <td class="pt24px">{{ isset($val->category->name) ? $val->category->name : '' }}</td>
-                            <td class="pt24px">{{ isset($val->user->name) ? $val->user->name : '' }}</td>
+                            <td>
+                                <label class="container"><input <?php if($val->status == 'true'){echo "checked";} ?> type="checkbox" id='status' ><span class="checkmark"></span></label>
+                            </td>
+                            <td>{{ isset($val->category->name) ? $val->category->name : '' }}</td>
+                            <td>{{ isset($val->user->name) ? $val->user->name : '' }}</td>
                             <td>
                                 {{date('d/m/Y',strtotime($val->updated_at))}} <br> <i style="font-size: 14px">{{date('d/m/Y',strtotime($val->created_at))}}</i>
                             </td>
-                            <td class="pt24px">
-                                <input type="checkbox" <?php if($val->status == 'true'){echo "checked";} ?> >
-                            </td>
-                            <td class="d-flex pt24px">
-                                <a href="admin/product/double/{{$val->id}}" class="mr-2"><i class="far fa-copy"></i></a>
+                            <td class="d-flex">
+                                <!-- <a href="admin/product/double/{{$val->id}}" class="mr-2"><i class="far fa-copy"></i></a> -->
                                 <a href="admin/product/edit/{{$val->id}}" class="mr-2"><i class="fas fa-edit" aria-hidden="true"></i></a>
                                 <a href="admin/product/delete/{{$val->id}}"><i class="fas fa-trash-alt"></i></a>
                             </td>

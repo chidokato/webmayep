@@ -147,6 +147,7 @@ Route::group(['prefix'=>'admin','middleware'=>'adminlogin'],function(){
 
 		// product
 		Route::get('del_img_detail/{id}','c_ajax@del_img_detail');
+		Route::get('updatestatusproduct/{id}','c_ajax@updatestatusproduct');
 		
 
 	});

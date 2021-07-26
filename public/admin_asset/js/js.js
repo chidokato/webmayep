@@ -190,7 +190,7 @@ $(document).ready(function(){
 $(document).ready(function(){
     $("button#del_img_detail").click(function(){
         var id = $(this).parents('#detail_img').find('input[id="id_img_detail"]').val();
-        alert(id);
+        // alert(id);
         $.ajax({
             url: 'admin/ajax/del_img_detail/'+id,
             type: 'GET',
@@ -200,7 +200,25 @@ $(document).ready(function(){
             },
         });
     });
-});
+}); // xóa ảnh trong db
+$(document).on('click', '#del_img_detail', function(e){ 
+    e.preventDefault();
+    $(this).parent('#detail_img').remove();
+    x--;
+}); // xóa thẻ div chứ ảnh
+$(document).ready(function(){
+    $("input#status").click(function(){
+        var status = $(this).is(':checked');
+        var id = $(this).parents('#product').find('input[id="id"]').val();
+        // alert(status);
+        $.ajax({
+            url:  'admin/ajax/updatestatusproduct/'+id, type: 'GET', cache: false, data: {
+                "status":status,
+                "id":id
+            },
+        });
+    });
+}); // update status
 // end sản phẩm
 
 

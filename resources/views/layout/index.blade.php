@@ -39,25 +39,24 @@
 <meta property="article:author" content="admin" />
 
 <!-- ================= Style ================== --> 
-<!-- Bootstrap core CSS -->
-<link href="frontend/assets/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="frontend/custom.css" rel="stylesheet">
-<!-- Custom styles for this template -->
-<link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
-<!-- Custom styles for blog -->
-<link href="frontend/blog.css" rel="stylesheet">
- <!-- Custom styles for navbar-top-fixed -->
-<link href="frontend/navbar-top-fixed.css" rel="stylesheet">
+<link href="frontend/acore/core.css" rel="stylesheet" />
+<link href="frontend/fonts/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="frontend/uikit/css/uikit.modify.css" rel="stylesheet" />
+<link href="frontend/library/css/reset.css" rel="stylesheet" />
+<link href="frontend/library/css/library.css" rel="stylesheet" />
+<link href="frontend/uikit/css/components/slideshow.min.css" rel="stylesheet" />
+<link href="frontend/plugins/lightslider-master/dist/css/lightslider.min.css" rel="stylesheet" />
+<link href="frontend/style.css" rel="stylesheet" />
+<script src="frontend/library/js/jquery.js"></script>
+<script src="frontend/uikit/js/uikit.min.js"></script>
+<link href="frontend/custom.css" rel="stylesheet" />
+<link href="frontend/hotline.css" rel="stylesheet" />
 <!-- ================= js ================== --> 
 
 @yield('css')
-
 {!! $head_setting->codeheader !!}
-
 </head>
-
 @include('layout.function')
-
 <body>
 
 @include('layout.header')
@@ -65,37 +64,7 @@
 @yield('content')
   
 @include('layout.footer')
-
 {!! $head_setting->codebody !!}
-
 @yield('script')
-
-@if(session('Alerts'))
-	<script> alert('Thành công'); </script>
-@endif
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
-<script src="frontend/assets/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.3.7/jquery.jscroll.js"></script>
-
-
-<script type="text/javascript">
-// ẩn thanh phân trang của laravel
-$('ul.pagination').hide();
-$(function() {
-    $('.infinite-scroll').jscroll({
-        autoTrigger: true,
-        loadingHtml: '<img class="center-block" src="/images/loading.gif" alt="Loading..." />',
-        padding: 0,
-        nextSelector: '.pagination li.active + li a',
-        contentSelector: 'div.infinite-scroll',
-        callback: function() {
-            // xóa thanh phân trang ra khỏi html mỗi khi load xong nội dung
-            $('ul.pagination').remove();
-        }
-    });
-}); 
-</script>
-
 </body>
 </html>

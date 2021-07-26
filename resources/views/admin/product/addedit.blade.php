@@ -46,9 +46,15 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Nội dung chi tết</label>
+                        <div class="tab">
+                            <button type="button" class="tablinks active" onclick="openCity(event, 'London')">Thông số kỹ thuật</button>
+                            <button type="button" class="tablinks" onclick="openCity(event, 'Paris')">Nội dung chi tết</button>
+                        </div>
+                        <div id="London" class="tabcontent" style="display: block;">
                             <textarea name="content" class="form-control ckeditor" id="ckeditor">{{ isset($data) ? $data->content : '' }}</textarea>
+                        </div>
+                        <div id="Paris" class="tabcontent">
+                            <textarea name="content" class="form-control ckeditor1" id="ckeditor1">{{ isset($data) ? $data->content : '' }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -107,7 +113,7 @@
                 </div> -->
                 <div class="form-group">
                     <label>Giá bán</label>
-                    <input value="{{ isset($data->product->price) ? $data->product->price : '' }}" type="text" name="price" class="form-control" placeholder="...">
+                    <input value="{{ isset($data->product->price) ? $data->product->price : '' }}" type="number" name="price" class="form-control" placeholder="...">
                 </div>
                 <!-- <div class="form-group">
                     <label>OldPrice</label>
@@ -161,6 +167,24 @@
     </div>
 </div>
 </form>
+
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
+
+
 @endsection
 
 @section('function')

@@ -114,6 +114,14 @@ class c_ajax extends Controller
             $images->delete();
         }
     }
+    public function updatestatusproduct($id)
+    {
+        if(Request::ajax()){
+            $articles = articles::find($id);
+            $articles->status = Request::get('status');
+            $articles->save();
+        }
+    }
     // product
 
 

@@ -7,69 +7,21 @@
 @section('url'){{asset('').$head_setting['slug']}}@endsection
 
 @section('content')
-<form class="search" action="search" method="post">
-  <input type="hidden" name="_token" value="{{csrf_token()}}" />
-  <select name="mebe">
-    <option value="">-Mẹ / Bé-</option>
-    @foreach($mebe as $val)
-    <option value="{{$val->sku}}">{{$val->name}}</option>
-    @endforeach
-  </select>
-  <select>
-    <option value="">-Phân loại-</option>
-    @foreach($phanloai as $val)
-    <option value="{{$val->id}}">{{$val->name}}</option>
-    @endforeach
-  </select>
-  <select>
-    <option value="">-Màu sắc-</option>
-    @foreach($mausac as $val)
-    <option value="{{$val->id}}">{{$val->name}}</option>
-    @endforeach
-  </select>
-  <select>
-    <option value="">-Size chân-</option>
-    @foreach($size as $val)
-    <option value="{{$val->id}}">{{$val->name}}</option>
-    @endforeach
-  </select>
-  <select>
-    <option value="">-Giá-</option>
-    <option value="1">Tăng dần</option>
-    <option value="2">Giảm dần</option>
-  </select>
-  <button type="submit">Tìm kiếm</button>
-</form>
-<div class="container">
-<main>
-  <div class="album bg-light infinite-scroll">
-      <div class="row row-cols-2 row-cols-sm-2 row-cols-md-6 homes">
-        @foreach($articles as $val)
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="data/product/300/{{$val->img}}">
-            <div class="card-body">
-              <div class="card-text">{{$val->name}}</div>
-              <div>
-                Màu sắc: 
-                @foreach($mausac as $ms)
-                @if(in_array($ms->id, explode(',',$val->product->mausac_id))) {{$ms->name}} @endif
-                @endforeach
-              </div>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Mua ngay</button>
-                  <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> -->
-                </div>
-                <small class="text-muted">{{date('d/m/Y',strtotime($val->updated_at))}}</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        @endforeach
-        {{$articles->links()}}
-      </div>
+<section class="main-slide">
+  <div class="uk-slidenav-position slide-show" data-uk-slideshow="{autoplay: true, autoplayInterval: 7500, animation: 'random-fx'}">
+    <ul class="uk-slideshow" style="height: 565px;">
+      <li data-slideshow-slide="img" aria-hidden="false" class="uk-active" style="height: 565px;"><div class="uk-cover-background uk-position-cover" style="background-image: url(data/banner1.jpg);"></div><img src="data/banner1.jpg" alt="" style="width: 100%; height: auto; opacity: 0;"></li>
+      <li data-slideshow-slide="img" aria-hidden="true" style="height: 565px;" class=""><div class="uk-cover-background uk-position-cover" style="background-image: url(data/banner2.jpg);"></div><img src="data/banner2.jpg" alt="" style="width: 100%; height: auto; opacity: 0;"></li>
+    </ul>
+    <a href="#" class="uk-slidenav uk-slidenav-contrast uk-slidenav-previous" data-uk-slideshow-item="previous"></a>
+    <a href="#" class="uk-slidenav uk-slidenav-contrast uk-slidenav-next" data-uk-slideshow-item="next"></a>
+    <ul class="uk-dotnav uk-dotnav-contrast uk-position-bottom uk-flex-center">
+    <li data-uk-slideshow-item="0" class="uk-active"><a href="#"></a></li>
+    <li data-uk-slideshow-item="1" class=""><a href="#"></a></li>
+  </ul>
   </div>
-</main>
-</div>
+</section>
+
+
+
 @endsection

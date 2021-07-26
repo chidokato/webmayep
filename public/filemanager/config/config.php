@@ -76,7 +76,8 @@ $config = array(
     | with start and final /
     |
     */
-    'upload_dir' => '/public/uploads/',
+    // 'upload_dir' => '/public/uploads/',
+    'upload_dir' => '/www/webmayep/public/uploads/',
     /*
     |--------------------------------------------------------------------------
     | relative path from filemanager folder to upload folder
