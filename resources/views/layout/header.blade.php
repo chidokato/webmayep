@@ -1,3 +1,4 @@
+<?php use App\category; ?>
 <header class="pc-header uk-visible-large header1">
   <section class="topbar">
     <div class="uk-container uk-container-center">
@@ -50,15 +51,21 @@
       <div class="uk-container uk-container-center">
         <nav class="main-nav">
           <ul class="uk-navbar-nav uk-clearfix main-menu float_left">
-            <li class="active"> <a href="https://duyvillas.com/">Trang chủ</a> </li>
-            <li class="">
-              <a href="#">Quận / Huyện</a>
+            <li class="active"> <a href="{{asset('')}}">Trang chủ</a> </li>
+            @foreach($category as $val)
+            <li> <a href="{{$val->slug}}">{{$val->name}}</a>
+              <?php $sub_category = category::where('status','true')->where('parent', $val->id)->orderBy('view','asc')->get(); ?>
+              @if(count($sub_category) > 0)
               <div class="dropdown-menu">
                 <ul class="uk-list sub-menu">
-                  <li><a href="location/ha-noi/quan-ba-dinh">Quận Ba Đình</a></li>
+                  @foreach($sub_category as $sub_cat)
+                  <li><a href="{{$sub_cat->slug}}">{{$sub_cat->name}}</a></li>
+                  @endforeach
                 </ul>
               </div>
+              @endif
             </li>
+            @endforeach
           </ul>
         </nav><!-- .main-nav -->    
       </div>

@@ -5,12 +5,6 @@ use App\themes;
 use App\category;
 use App\setting;
 use App\articles;
-use App\home;
-use App\slider;
-use App\images;
-use App\district;
-use App\mausac;
-use App\size;
 use Mail;
 
 class c_frontend extends Controller
@@ -19,36 +13,24 @@ class c_frontend extends Controller
     {
         $head_logo = themes::where('id',1)->first();
         $head_logo_trang = themes::where('id',2)->first();
-        $slider = slider::all();
         $head_setting = setting::where('id',1)->first();
-        $mebe = category::where('sort_by','1')->where('icon','1')->where('status','true')->where('parent', 0)->orderBy('view','asc')->get();
-        $phanloai = category::where('sort_by','1')->where('icon','2')->where('status','true')->where('parent', 0)->orderBy('view','asc')->get();
-        $menu_top = category::wherein('sort_by',[2,3])->where('status','true')->where('parent', 0)->orderBy('view','asc')->get();
-        $shop_searchs = category::where('status','true')->where('sort_by',1)->where('parent', 0)->get();
-        $mausac = mausac::all();
-        $size = size::orderBy('name','asc')->get();
+        $category = category::where('status','true')->where('parent', 0)->orderBy('view','asc')->get();
 
         view()->share( [
             'head_logo'=>$head_logo,
             'head_logo_trang'=>$head_logo_trang,
-            'slider'=>$slider,
             'head_setting'=>$head_setting,
-            'mebe'=>$mebe,
-            'phanloai'=>$phanloai,
-            'menu_top'=>$menu_top,
-            'shop_searchs'=>$shop_searchs,
-            'mausac'=>$mausac,
-            'size'=>$size,
+            'category'=>$category,
         ]);
     }
 
     public function home()
     {
         $articles = articles::where('sort_by',1)->orderBy('id','desc')->paginate(30);
-        $mausac = mausac::all();
+        $slider = themes::where('note','slider')->orderBy('id','desc')->get();
         return view('pages.home',[
             'articles' => $articles,
-            'mausac' => $mausac,
+            'slider' => $slider,
         ]);
     }
 

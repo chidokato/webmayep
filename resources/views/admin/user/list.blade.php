@@ -3,20 +3,20 @@
 @section('content')
 @include('admin.errors.alerts')
 <div class="d-sm-flex align-items-center justify-content-between mb-3">
-    <form style="display: flex;" action="admin/user/loc" method="post">
-        <input type="hidden" name="_token" value="{{csrf_token()}}" />
+    <form style="display: flex;" action="admin/user/search" method="post"><input type="hidden" name="_token" value="{{csrf_token()}}" />
+        <div class="input-group">
+            <input value="{{ isset($key) ? $key : '' }}" name="key" type="text" class="form-control mr-3" placeholder="Name...">
+        </div>
+        <input type="text" class="form-control mr-3" name="datefilter" value="{{ isset($datefilter) ? $datefilter : '' }}" placeholder='Created at ...' />
         <select style="width: 100px;" class="form-control mr-3" name="paginate">
             <option <?php if(isset($paginate) && $paginate=='50'){echo "selected";} ?> value="50">50</option>
             <option <?php if(isset($paginate) && $paginate=='100'){echo "selected";} ?> value="100">100</option>
             <option <?php if(isset($paginate) && $paginate=='200'){echo "selected";} ?> value="200">200</option>
         </select>
-        <div class="input-group">
-            <input value="{{ isset($key) ? $key : '' }}" name="name" type="text" class="form-control bg-light small" placeholder="Search for...">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                    <i class="fas fa-search fa-sm"></i>
-                </button>
-            </div>
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">
+                <i class="fas fa-search fa-sm"></i>
+            </button>
         </div>
     </form>
     <a href="admin/user/add"><button class="btn-primary" type="button"><i class="far fa-file"></i> Thêm mới</button></a>
@@ -43,45 +43,40 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>
-                                <input onclick="toggle(this);" type="checkbox" value="" id="checkbox">
-                            </th>
                             <th></th>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>User</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                            <th>Hot</th>
-                            <th>View</th>
-                            <th></th>
+                            <th>Tài khoản</th>
+                            <th>Họ & tên</th>
+                            <th>Quyền người dùng</th>
+                            <th>Địa chỉ email</th>
+                            <th>Số điện thoại</th>
+                            <th>Ngày thêm</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($user as $val)
                         <tr>
-                            <td class="pt24px">
-                                <input type="checkbox" value="{{$val->id}}">
-                            </td>
                             <td>
                                 {!! isset($val->img) ? '<img style="width: 48px; height: 48px; object-fit: cover;" src="data/user/80/'.$val->img.'" class="thumbnail-img align-self-center" alt="" />' : '' !!}
                             </td>
+                            <td style="color: red;">{{$val->name}}</td>
+                            <td>{{$val->your_name}}</td>
                             <td>
-                                {{$val->name}}
+                                <?php
+                                    switch ($val->permission) {
+                                        case "0": echo "superadmin"; break;
+                                        case "1": echo "admin"; break;
+                                        case "2": echo "author"; break;
+                                        default: echo "none";
+                                    }
+                                ?>
                             </td>
-                            <td class="pt24px">{{ isset($val->category->name) ? $val->category->name : '' }}</td>
-                            <td class="pt24px">{{ isset($val->user->name) ? $val->user->name : '' }}</td>
+                            <td>{{$val->email}}</td>
+                            <td>{{$val->phone}}</td>
                             <td>
-                                {{date('d/m/Y',strtotime($val->updated_at))}} <br> <i style="font-size: 14px">{{date('d/m/Y',strtotime($val->created_at))}}</i>
+                                {{date('d/m/Y',strtotime($val->updated_at))}}
                             </td>
-                            <td class="pt24px">
-                                <input type="checkbox" <?php if($val->status == 'true'){echo "checked";} ?> >
-                            </td>
-                            <td class="pt24px">22</td>
-                            <td class="pt24px"></td>
-                            <td class="d-flex pt24px">
-                                <a target="_blank" href="{{asset('')}}" class="mr-2"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="admin/user/double/{{$val->id}}" class="mr-2"><i class="far fa-copy"></i></a>
+                            <td>
                                 <a href="admin/user/edit/{{$val->id}}" class="mr-2"><i class="fas fa-edit" aria-hidden="true"></i></a>
                                 <a href="admin/user/delete/{{$val->id}}"><i class="fas fa-trash-alt"></i></a>
                             </td>

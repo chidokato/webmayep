@@ -1,8 +1,8 @@
 @extends('admin.layout.index')
-@section('news') menu-item-active @endsection
+@section('themes') menu-item-active @endsection
 @section('content')
 <div id="alerts">@include('admin.errors.alerts')</div>
-<form action="admin/news/<?php
+<form action="admin/themes/<?php
 if(isset($data)){
     if(isset($double)) echo 'add';
     else echo 'edit/'.$data->id;
@@ -16,7 +16,7 @@ if(isset($data)){
     <button type="submit" id="save_back" class="btn-success"><i class="far fa-save"></i> Save & Back</button>
 </div>
 <div class="row">
-    <div class="col-xl-9 col-lg-9">
+    <div class="col-xl-8 col-lg-8">
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Information</h6>
@@ -37,51 +37,37 @@ if(isset($data)){
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label style="display: flex;">Name</label> 
+                            <label>Name</label> 
                             <input value="{{ isset($data) ? $data->name : '' }}" name="name" placeholder="Name" type="text" class="form-control">
-                            {!! isset($data) ? '
-                            <input value="'.$data->slug.'" name="slug" placeholder="slug" type="text" class="slug">
-                            ' : '' !!}
+                        </div>
+                        <div class="form-group">
+                            <label>tit</label> 
+                            <input value="{{ isset($data) ? $data->tit : '' }}" name="tit" placeholder="tit" type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>note</label> 
+                            <select name="note" class="form-control">
+                                <option <?php if(isset($data) && $data->note == 'logo'){echo "selected";} ?> value="logo">logo</option>
+                                <option <?php if(isset($data) && $data->note == 'logo ân bản'){echo "selected";} ?> value="logo ân bản">logo ân bản</option>
+                                <option <?php if(isset($data) && $data->note == 'slider'){echo "selected";} ?> value="slider">slider</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>link</label> 
+                            <input value="{{ isset($data) ? $data->link : '' }}" name="link" placeholder="link" type="text" class="form-control">
                         </div>
                     </div>
-                    
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label>Detail</label>
-                            <textarea rows="3" name="detail" class="form-control">{{ isset($data) ? $data->detail : '' }}</textarea>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Content</label>
-                            <textarea name="content" class="form-control ckeditor" id="ckeditor">{{ isset($data) ? $data->content : '' }}</textarea>
+                            <label>content</label>
+                            <textarea rows="3" name="content" class="form-control">{{ isset($data) ? $data->content : '' }}</textarea>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        @include('admin.layout.seooption')
     </div>
-    <div class="col-xl-3 col-lg-3">
-        <div class="card shadow mb-4">
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Tùy chọn</h6>
-            </div>
-            <div class="card-body">
-                <div class="form-group">
-                    <label>Category</label>
-                    <select name='cat_id' class="form-control kt_select2_1">
-                        <option value="">-- Select --</option>
-                        @if(isset($data))
-                        <?php addeditcat ($category,0, $str='',$data['category_id']) ?>
-                        @else
-                        <?php addeditcat ($category,0,$str='',old('parent')); ?>
-                        @endif
-                    </select>
-                </div>
-            </div>
-        </div>
-        
+    <div class="col-xl-4 col-lg-4">
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Images</h6>
@@ -101,7 +87,7 @@ if(isset($data)){
             <div class="card-body">
                 <div class="file-upload">
                     <div class="file-upload-content" onclick="$('.file-upload-input').trigger( 'click' )">
-                        <img class="file-upload-image" src="{{ isset($data) ? 'data/news/300/'.$data->img : 'data/no_image.jpg' }}" />
+                        <img class="file-upload-image" src="{{ isset($data) ? 'data/themes/'.$data->img : 'data/no_image.jpg' }}" />
                     </div>
                     <div class="image-upload-wrap">
                         <input name="img" class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
@@ -112,47 +98,5 @@ if(isset($data)){
     </div>
 </div>
 </form>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('form').submit(function(event) {
-            $.ajax({
-                method: $(this).attr('method'),
-                url: $(this).attr('action'),
-                data: $(this).serialize(),
-                success: function(datas){
-                    // $('#loadchat').html(datas);
-                }
-            }).done(function(response) {
-                // Process the response here
-            });
-            event.preventDefault(); // <- avoid reloading
-       });
-    });
-</script>
-
 @endsection
-
-@section('function')
-<?php 
-	function addeditcat ($data, $parent=0, $str='',$select=0)
-	{
-		foreach ($data as $value) {
-			if ($value['parent'] == $parent) {
-				if($select != 0 && $value['id'] == $select )
-				{ ?>
-					<option value="<?php echo $value['id']; ?>" selected> <?php echo $str.$value['name']; ?> </option>
-				<?php } else { ?>
-					<option value="<?php echo $value['id']; ?>" > <?php echo $str.$value['name']; ?> </option>
-				<?php }
-				
-				addeditcat ($data, $value['id'], $str.'__',$select);
-			}
-		}
-	}
-?>
-@endsection
-
-
-
 

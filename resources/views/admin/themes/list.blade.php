@@ -2,111 +2,96 @@
 @section('themes') menu-item-active @endsection
 @section('content')
 @include('admin.errors.alerts')
-<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-<form action="admin/themes/add" method="POST" enctype="multipart/form-data">
-<input type="hidden" name="_token" value="{{csrf_token()}}" />
-    <!--begin::Subheader-->
-    <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
-        <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-            <!--begin::Info-->
-            <div class="d-flex align-items-center flex-wrap mr-2">
-                <!--begin::Page Title-->
-                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Themes: add/edit </h5>
-                <!--end::Page Title-->
-                <!--begin::Actions-->
-                <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
-            </div>
-            <!--end::Info-->
-            <div class="d-flex align-items-center">
-                <!--begin::Actions-->
-                <button type="reset" class="btn btn-warning btn-sm  mr-2"><i class="las la-reply"></i> Back</button>
-                <button type="reset" class="btn btn-danger btn-sm  mr-2"><i class="las la-sync"></i> Reset</button>
-                <button type="submit" class="btn btn-success btn-sm"><i class="las la-save"></i> Save</button>
-                <!--end::Actions-->
-            </div>
+<div class="d-sm-flex align-items-center justify-content-between mb-3">
+    <!-- <h1 class="h3 mb-0 text-gray-800">List Category</h1> -->
+    <form style="display: flex;" action="admin/themes/search" method="post"><input type="hidden" name="_token" value="{{csrf_token()}}" />
+        <div class="input-group">
+            <input value="{{ isset($key) ? $key : '' }}" name="key" type="text" class="form-control mr-3" placeholder="Name...">
         </div>
-    </div>
-    <!--end::Subheader-->
-    <!--begin::Entry-->
-    <div class="d-flex flex-column-fluid">
-        <!--begin::Container-->
-        <div class="container">
-            <!--begin::Dashboard-->
-            <div class="row">
-                <div class="col-xxl-12 order-2 order-xxl-1">
-                    <div class="card card-custom card-stretch gutter-b">
-                        <div class="card-header">
-                            <h3 class="card-title">Logo</h3>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-bordered table-hover table-checkable mt-10" > <!-- id="kt_datatable1" -->
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <label class="checkbox checkbox-lg checkbox-inline mr-2">
-                                                <input onclick="toggle(this);" type="checkbox" value="" id="checkbox">
-                                                <span></span>
-                                                <button class="btn btn-danger btn-sm  ml-2 delall"><i class="la la-trash"></i> Dell all</button>
-                                            </label>
-                                        </th>
-                                        <th>Name</th>
-                                        <th>Vị trí</th>
-                                        <th>User</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th>Hot</th>
-                                        <th>View</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($themes as $val)
-                                    <tr>
-                                        <td>
-                                            <label class="checkbox checkbox-lg checkbox-inline mr-2">
-                                                <input type="checkbox" value="{{$val->id}}">
-                                                <span></span>
-                                            </label>
-                                        </td>
-                                        <td class="sorting_1 dtr-control">
-                                            <div class="d-flex align-items-center">
-                                                <div class="symbol symbol-50 flex-shrink-0">
-                                                    {!! isset($val->img) ? '<img src="data/themes/'.$val->img.'" class="thumbnail-img align-self-center" alt="" />' : '' !!}
-                                                </div>
-                                                <div class="ml-3">
-                                                    <span class="text-dark-75 font-weight-bold line-height-sm d-block">{{$val->name}}</span>
-                                                    <!-- <a href="#" class="text-muted text-hover-primary">Beier-Mante</a> -->
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>{{ isset($val->note) ? $val->note : '' }}</td>
-                                        <td></td>
-                                        <td>
-                                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{date('d/m/Y',strtotime($val->created_at))}}</span>
-                                            <span class="text-muted font-weight-bold">{{date('d/m/Y',strtotime($val->updated_at))}}</span>
-                                        </td>
-                                        <td>
-                                            <label class="checkbox checkbox-lg checkbox-inline mr-2">
-                                                <input type="checkbox" <?php if($val->status == 'true'){echo "checked";} ?> >
-                                                <span></span>
-                                            </label>
-                                        </td>
-                                        <td>22</td>
-                                        <td>10/15/2017</td>
-                                        <td nowrap="nowrap">
-                                            <a href="admin/product/edit/{{$val->id}}" class="btn btn-sm btn-clean btn-icon" title="Edit details"><i class="la la-edit"></i></a>
-                                            <a href="admin/product/delete/{{$val->id}}" class="btn btn-sm btn-clean btn-icon" title="Delete"><i class="la la-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+        <input type="text" class="form-control mr-3" name="datefilter" value="{{ isset($datefilter) ? $datefilter : '' }}" placeholder='Created at ...' />
+        <select style="width: 100px;" class="form-control mr-3" name="paginate">
+            <option <?php if(isset($paginate) && $paginate=='50'){echo "selected";} ?> value="50">50</option>
+            <option <?php if(isset($paginate) && $paginate=='100'){echo "selected";} ?> value="100">100</option>
+            <option <?php if(isset($paginate) && $paginate=='200'){echo "selected";} ?> value="200">200</option>
+        </select>
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">
+                <i class="fas fa-search fa-sm"></i>
+            </button>
+        </div>
+    </form>
+    <a href="admin/themes/add"><button class="btn-primary" type="button"><i class="far fa-file"></i> Thêm mới</button></a>
+</div>
+<div class="row">
+    <div class="col-xl-12 col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Danh sách sản phẩm</h6>
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header">Dropdown Header:</div>
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </div>
             </div>
+            <div class="card-body">
+                <table class="table">
+                    <form method="post" action="admin/themes/delete_all"> <input type="hidden" name="_token" value="{{csrf_token()}}" />
+                    <thead>
+                        <tr>
+                            <th style="position: relative; width: 25px;">
+                                <label class="container"><input onclick="toggle(this);" type="checkbox" id="checkbox"><span class="checkmark"></span></label>
+                                <button type="submit" onclick="dell()" class="btn btn-danger btn-sm  ml-2 delall"><i class="la la-trash"></i> Dell all</button>
+                            </th>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>note</th>
+                            <th>User</th>
+                            <th>Date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($themes as $val)
+                        <tr id="themes">
+                            <input type="hidden" id="id" value="{{$val->id}}" />
+                            <td class="td_checkbox">
+                                <label class="container"><input type="checkbox" name="foo[]" value="{{$val->id}}"><span class="checkmark"></span></label>
+                            </td>
+                            <td class="thumbnail-img">
+                                {!! isset($val->img) ? '<img data-action="zoom" src="data/themes/'.$val->img.'" />' : '' !!}
+                            </td>
+                            <td>
+                                {{$val->name}}
+                            </td>
+                            <td>
+                                <label class="container"><input <?php if($val->status == 'true'){echo "checked";} ?> type="checkbox" id='status' ><span class="checkmark"></span></label>
+                            </td>
+                            <td>{{ $val->note }}</td>
+                            <td>{{ isset($val->user->name) ? $val->user->name : '' }}</td>
+                            <td>
+                                <!-- {{date('d/m/Y',strtotime($val->updated_at))}} <br>  -->
+                                <i style="font-size: 14px">{{date('d/m/Y',strtotime($val->created_at))}}</i>
+                            </td>
+                            <td class="d-flex">
+                                <a href="admin/themes/double/{{$val->id}}" class="mr-2"><i class="far fa-copy"></i></a>
+                                <a href="admin/themes/edit/{{$val->id}}" class="mr-2"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                                <a onclick="dell()" href="admin/themes/delete/{{$val->id}}"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                    </form>
+                </table>
+            </div>
         </div>
     </div>
-<form>
 </div>
 @endsection

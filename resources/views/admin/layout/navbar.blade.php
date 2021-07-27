@@ -60,6 +60,9 @@
         </div>
     </li> -->
     <li class="nav-item">
+        <a class="nav-link" href="admin/themes/list"><i class="fas fa-fw fa-chart-area"></i><span>Giao diện</span></a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" href="admin/setting/list"><i class="fas fa-fw fa-chart-area"></i><span>Cài đặt</span></a>
     </li>
     <li class="nav-item">

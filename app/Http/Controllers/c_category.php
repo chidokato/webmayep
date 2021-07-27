@@ -12,11 +12,33 @@ class c_category extends Controller
 {
     public function getlist()
     {
-        $category = category::orderBy('view','asc')->get();
-    	$parent_cat = category::where('parent',0)->orderBy('view','asc')->get();
+        $category = category::orderBy('view','asc')->paginate(20);
     	return view('admin.category.list',[
             'category'=>$category,
-            'parent_cat'=>$parent_cat,
+        ]);
+    }
+
+    public function search(Request $Request)
+    {
+        $datefilter[] = '';
+        $category = category::orderBy('view','asc')->where('id','!=' , 0);
+        if($Request->key){
+            $category->where('name','like',"%$Request->key%");
+        }
+        if(isset($Request->datefilter)){
+            $datefilter = explode(" - ", $Request->datefilter);
+            $day1 = date('Y-m-d',strtotime($datefilter[0]));
+            $day2 = date('Y-m-d',strtotime($datefilter[1]));
+            // $category->whereBetween('created_at', [$day1, $day2]);
+            $category->whereDate('created_at','>=', $day1)->whereDate('created_at','<=', $day2);
+        }
+        $category = $category->paginate($Request->paginate);
+
+        return view('admin.category.list',[
+            'category'=>$category,
+            'key'=>$Request->key,
+            'datefilter'=>$Request->datefilter,
+            'paginate'=>$Request->paginate,
         ]);
     }
 
@@ -57,9 +79,6 @@ class c_category extends Controller
             $category->img = $filename;
         }
         $category->save();
-
-
-
         return redirect('admin/category/list')->with('Success','Thành công');
     }
 
@@ -119,14 +138,11 @@ class c_category extends Controller
 
     public function getdelete($id)
     {
-        $category = category::find($id);
-        $count = category::where('parent',$id)->count();
-        if($count > 0)
-        {
-            return redirect('admin/category/list')->with('errors','Errors parent');
-        }
-        else
-        {
+        $count_cat = category::where('parent',$id)->count();
+        if($count_cat > 0){
+            return redirect('admin/category/list')->with('Error','Error parent');
+        }else{
+            $category = category::find($id);
             if(File::exists('data/category/'.$category->img)) {
                 File::delete('data/category/'.$category->img);
                 File::delete('data/category/thumbnail/'.$category->img); }
@@ -141,14 +157,11 @@ class c_category extends Controller
     {
         if (isset($Request->foo)) {
             foreach($Request->foo as $id){
-                $category = category::find($id);
-                $count = category::where('parent',$id)->count();
-                if($count > 0)
-                {
-                    return redirect('admin/category/list')->with('errors','Errors parent');
-                }
-                else
-                {
+                $count_cat = category::where('parent',$id)->count();
+                if($count_cat > 0){
+                    return redirect('admin/category/list')->with('Error','Error parent');
+                }else{
+                    $category = category::find($id);
                     if(File::exists('data/category/'.$category->img)) {
                         File::delete('data/category/'.$category->img);
                         File::delete('data/category/thumbnail/'.$category->img); }
@@ -157,7 +170,10 @@ class c_category extends Controller
                     $category->delete();
                 }
             }
+            return redirect('admin/category/list')->with('Success','Success');
         }
-        return redirect('admin/category/list')->with('Success','Success');
     }
+
+    
+
 }

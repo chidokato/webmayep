@@ -20,6 +20,30 @@ class c_news extends Controller
         ]);
     }
 
+    public function search(Request $Request)
+    {
+        $datefilter[] = '';
+        $articles = articles::where('sort_by',2)->orderBy('id','desc')->where('id','!=' , 0);
+        if($Request->key){
+            $articles->where('name','like',"%$Request->key%");
+        }
+        if(isset($Request->datefilter)){
+            $datefilter = explode(" - ", $Request->datefilter);
+            $day1 = date('Y-m-d',strtotime($datefilter[0]));
+            $day2 = date('Y-m-d',strtotime($datefilter[1]));
+            // $articles->whereBetween('created_at', [$day1, $day2]);
+            $articles->whereDate('created_at','>=', $day1)->whereDate('created_at','<=', $day2);
+        }
+        $articles = $articles->paginate($Request->paginate);
+
+        return view('admin.news.list',[
+            'news'=>$articles,
+            'key'=>$Request->key,
+            'datefilter'=>$Request->datefilter,
+            'paginate'=>$Request->paginate,
+        ]);
+    }
+
     public function getadd()
     {
         $category = category::where('sort_by',2)->orderBy('id','desc')->get();
@@ -66,6 +90,20 @@ class c_news extends Controller
         return redirect('admin/news/list')->with('Alerts','Thành công');
     }
 
+    public function double($id)
+    {
+        $double = 'double';
+        $data = articles::findOrFail($id);
+        $seo = seo::findOrFail($data['seo_id']);
+        $category = category::where('sort_by',2)->orderBy('id','desc')->get();
+        return view('admin.news.addedit',[
+            'data'=>$data,
+            'category'=>$category,
+            'seo'=>$seo,
+            'double'=>$double,
+        ]);
+    }
+    
     public function getedit($id)
     {
         $data = articles::findOrFail($id);
@@ -132,5 +170,25 @@ class c_news extends Controller
         // xóa ảnh
         $articles->delete();
         return redirect('admin/news/list')->with('Alerts','Thành công');
+    }
+
+    public function delete_all(Request $Request)
+    {
+        if (isset($Request->foo)) {
+            foreach($Request->foo as $id){
+                $articles = articles::find($id);
+                $seo = seo::find($articles->seo_id);
+                $seo->delete();
+                // xóa ảnh
+                if(File::exists('data/news/'.$articles->img)) {
+                    File::delete('data/news/'.$articles->img);
+                    File::delete('data/news/300/'.$articles->img);
+                    File::delete('data/news/80/'.$articles->img);
+                }
+                // xóa ảnh
+                $articles->delete();
+            }
+        }
+        return redirect('admin/news/list')->with('Success','Success');
     }
 }

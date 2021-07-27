@@ -32,11 +32,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label style="display: flex;">Name</label> 
-                                <input value="{{ isset($data) ? $data->name : '' }}" name="name" placeholder="Name" type="text" class="form-control">
-                                {!! isset($data) ? '
-                                <input value="'.$data->slug.'" name="slug" placeholder="slug" type="text" class="slug">
-                                ' : '' !!}
+                                <label>Name</label>
+                                <input value="{{ isset($data) ? $data->name : '' }}" name="name" placeholder="Tên danh mục" type="text" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -49,6 +46,21 @@
                             <div class="form-group">
                                 <label>Icon</label>
                                 <input value="{{ isset($data) ? $data->icon : '' }}" name="icon" placeholder="Icon" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {!! isset($data) ? '
+                                <label>Slug</label>
+                                <input value="'.$data->slug.'" name="slug" placeholder="slug" type="text" class="form-control">
+                                ' : '
+                                <label class="">Sort by</label>
+                                <select name="sort_by" class="form-control select2" id="sort_by">
+                                    <option value="1">Product</option>
+                                    <option value="2">News</option>
+                                    <option value="3">pages</option>
+                                </select>
+                                ' !!}
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -96,13 +108,15 @@
             <div class="card-body">
                 <div class="file-upload">
                     <div class="file-upload-content" onclick="$('.file-upload-input').trigger( 'click' )">
-                        <img class="file-upload-image" src="data/news/300/{{ isset($data) ? $data->img : 'no_image.jpg' }}" />
+                        <img class="file-upload-image" src="{{ isset($data) ? 'data/category/'.$data->img : 'data/no_image.jpg' }}" />
                     </div>
                     <div class="image-upload-wrap">
                         <input name="img" class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
                     </div>
+                    <!-- <label><input type="checkbox" name="dell_img">Xóa ảnh</label> -->
                 </div>
             </div>
+
         </div>
     </div>
 </div>

@@ -6,15 +6,63 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\user;
+use App\category;
+use App\articles;
 use File;
 
 class usercontroller extends Controller
 {
     //
+    public function profile($id)
+    {
+    	$user = user::find($id);
+        $category = category::where('user_id', $user->id)->orderBy('id','desc')->take(20)->get();
+        $product = articles::where('sort_by', 1)->where('user_id', $user->id)->orderBy('id','desc')->take(20)->get();
+        $news = articles::where('sort_by', 2)->where('user_id', $user->id)->orderBy('id','desc')->take(20)->get();
+        return view('admin.user.profile',[
+            'data'=>$user,
+            'category'=>$category,
+            'product'=>$product,
+            'news'=>$news,
+        ]);
+    }
+
+    public function alerts($id)
+    {
+        $user = user::find($id);
+        return view('admin.user.alerts',[
+            'data'=>$user,
+        ]);
+    }
+
     public function getlist()
     {
-    	$user = user::orderBy('id','desc')->get();
-    	return view('admin.user.list',['user'=>$user]);
+        $user = user::orderBy('id','desc')->get();
+        return view('admin.user.list',['user'=>$user]);
+    }
+
+    public function search(Request $Request)
+    {
+        $datefilter[] = '';
+        $user = user::orderBy('id','desc')->where('id','!=' , 0);
+        if($Request->key){
+            $user->where('name','like',"%$Request->key%");
+        }
+        if(isset($Request->datefilter)){
+            $datefilter = explode(" - ", $Request->datefilter);
+            $day1 = date('Y-m-d',strtotime($datefilter[0]));
+            $day2 = date('Y-m-d',strtotime($datefilter[1]));
+            // $user->whereBetween('created_at', [$day1, $day2]);
+            $user->whereDate('created_at','>=', $day1)->whereDate('created_at','<=', $day2);
+        }
+        $user = $user->paginate($Request->paginate);
+
+        return view('admin.user.list',[
+            'user'=>$user,
+            'key'=>$Request->key,
+            'datefilter'=>$Request->datefilter,
+            'paginate'=>$Request->paginate,
+        ]);
     }
 
     public function getadd()
@@ -27,8 +75,6 @@ class usercontroller extends Controller
     	$this->validate($Request,
     		[
     			'name' => 'Required|min:3|max:50',
-                // 'email' => 'Required|email|unique:users,email',
-    			'email' => 'Required|unique:users,email',
     			'password' => 'Required',
     			'passwordagain' => 'Required|same:password',
     		],
@@ -36,9 +82,14 @@ class usercontroller extends Controller
     		] );
     	$user = new user;
         $user->name = $Request->name;
-        $user->email = $Request->email.'@gmail.com';
         $user->password = bcrypt($Request->password);
         $user->permission = $Request->permission;
+        $user->your_name = $Request->your_name;
+        $user->email = $Request->email;
+        $user->phone = $Request->phone;
+        $user->birthday = $Request->birthday;
+        $user->facebook = $Request->facebook;
+        
         if ($Request->hasFile('img')) {
             $file = $Request->file('img');
             $filename = $file->getClientOriginalName();
@@ -55,7 +106,7 @@ class usercontroller extends Controller
     public function getedit($id)
     {
         $user = user::find($id);
-    	return view('admin.user.addedit',['user'=>$user]);
+    	return view('admin.user.addedit',['data'=>$user]);
     }
 
     public function postedit(Request $Request,$id)
@@ -69,10 +120,16 @@ class usercontroller extends Controller
             ] );
         $user = user::find($id);
         $user->name = $Request->name;
+        $user->your_name = $Request->your_name;
+        $user->email = $Request->email;
+        $user->phone = $Request->phone;
+        $user->birthday = $Request->birthday;
+        $user->facebook = $Request->facebook;
         if($user->permission > 0)
         {
             $user->permission = $Request->permission;
         }
+
         if($Request->changepassword == "on")
         {
             $this->validate($Request,
@@ -80,11 +137,10 @@ class usercontroller extends Controller
                 'password' => 'Required',
                 'passwordagain' => 'Required|same:password'                
             ],
-            [
-                
-            ] );
+            [] );
             $user->password = bcrypt($Request->password);
         }
+
         if ($Request->hasFile('img')) {
             if(File::exists('data/user/'.$user->avatar)) { File::delete('data/user/'.$user->avatar); } // xóa ảnh
             $file = $Request->file('img');
@@ -102,7 +158,7 @@ class usercontroller extends Controller
     public function getdelete($id)
     {
         if (Auth::User()->id == $id) {
-            return redirect('admin/user/list')->with('Errors','Bạn không thể xóa chính mình ');
+            return redirect('admin/user/list')->with('error','Bạn không thể xóa chính mình ');
         }else{
             $user = user::find($id);
             $user->delete();
@@ -119,22 +175,18 @@ class usercontroller extends Controller
 
     public function postlogin(Request $request)
     {
-        $email = $request->name.'@gmail.com';
     	$this->validate($request,[
     		'name' => 'required',
     		'password' => 'required|min:3|max:32'
-    		],[
-
-            ]);
-    	if(Auth::attempt(['email'=>$email,'password'=>$request->password]))
+    		],[]);
+    	if(Auth::attempt(['name'=>$request->name,'password'=>$request->password]))
     	{
     		return redirect('admin/dashboard');
     	}
     	else
     	{
-    		return redirect('admin_login')->with('Alerts','Lỗi ! Nhập sai email hoặc mật khẩu !');
+    		return redirect('admin_login')->with('Alerts','Lỗi ! Nhập sai tên đăng nhập hoặc mật khẩu !');
     	}
-
     }
 
     public function getlogout()

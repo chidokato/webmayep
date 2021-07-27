@@ -4,20 +4,20 @@
 @include('admin.errors.alerts')
 <div class="d-sm-flex align-items-center justify-content-between mb-3">
     <!-- <h1 class="h3 mb-0 text-gray-800">List Category</h1> -->
-    <form style="display: flex;" action="admin/news/loc" method="post">
-        <input type="hidden" name="_token" value="{{csrf_token()}}" />
+    <form style="display: flex;" action="admin/product/search" method="post"><input type="hidden" name="_token" value="{{csrf_token()}}" />
+        <div class="input-group">
+            <input value="{{ isset($key) ? $key : '' }}" name="key" type="text" class="form-control mr-3" placeholder="Name...">
+        </div>
+        <input type="text" class="form-control mr-3" name="datefilter" value="{{ isset($datefilter) ? $datefilter : '' }}" placeholder='Created at ...' />
         <select style="width: 100px;" class="form-control mr-3" name="paginate">
             <option <?php if(isset($paginate) && $paginate=='50'){echo "selected";} ?> value="50">50</option>
             <option <?php if(isset($paginate) && $paginate=='100'){echo "selected";} ?> value="100">100</option>
             <option <?php if(isset($paginate) && $paginate=='200'){echo "selected";} ?> value="200">200</option>
         </select>
-        <div class="input-group">
-            <input value="{{ isset($key) ? $key : '' }}" name="name" type="text" class="form-control bg-light small" placeholder="Search for...">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                    <i class="fas fa-search fa-sm"></i>
-                </button>
-            </div>
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">
+                <i class="fas fa-search fa-sm"></i>
+            </button>
         </div>
     </form>
     <a href="admin/product/add"><button class="btn-primary" type="button"><i class="far fa-file"></i> Thêm mới</button></a>
@@ -62,11 +62,11 @@
                         @foreach($product as $val)
                         <tr id="product">
                             <input type="hidden" id="id" value="{{$val->id}}" />
-                            <td>
+                            <td class="td_checkbox">
                                 <label class="container"><input type="checkbox" name="foo[]" value="{{$val->id}}"><span class="checkmark"></span></label>
                             </td>
-                            <td>
-                                {!! isset($val->img) ? '<img style="width: 48px; height: 48px; object-fit: cover;" src="data/product/80/'.$val->img.'" class="thumbnail-img align-self-center" alt="" />' : '' !!}
+                            <td class="thumbnail-img">
+                                {!! isset($val->img) ? '<img data-action="zoom" src="data/product/'.$val->img.'" />' : '' !!}
                             </td>
                             <td>
                                 {{$val->name}}
@@ -77,12 +77,13 @@
                             <td>{{ isset($val->category->name) ? $val->category->name : '' }}</td>
                             <td>{{ isset($val->user->name) ? $val->user->name : '' }}</td>
                             <td>
-                                {{date('d/m/Y',strtotime($val->updated_at))}} <br> <i style="font-size: 14px">{{date('d/m/Y',strtotime($val->created_at))}}</i>
+                                <!-- {{date('d/m/Y',strtotime($val->updated_at))}} <br>  -->
+                                <i style="font-size: 14px">{{date('d/m/Y',strtotime($val->created_at))}}</i>
                             </td>
                             <td class="d-flex">
-                                <!-- <a href="admin/product/double/{{$val->id}}" class="mr-2"><i class="far fa-copy"></i></a> -->
+                                <a href="admin/product/double/{{$val->id}}" class="mr-2"><i class="far fa-copy"></i></a>
                                 <a href="admin/product/edit/{{$val->id}}" class="mr-2"><i class="fas fa-edit" aria-hidden="true"></i></a>
-                                <a href="admin/product/delete/{{$val->id}}"><i class="fas fa-trash-alt"></i></a>
+                                <a onclick="dell()" href="admin/product/delete/{{$val->id}}"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
                         @endforeach

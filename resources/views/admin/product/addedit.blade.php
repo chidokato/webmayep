@@ -2,7 +2,12 @@
 @section('product') menu-item-active @endsection
 @section('content')
 @include('admin.errors.alerts')
-<form action="admin/product/{{ isset($data) ? 'edit/'.$data->id : 'add' }}" method="POST" enctype="multipart/form-data">
+<form action="admin/product/<?php
+if(isset($data)){
+    if(isset($double)) echo 'add';
+    else echo 'edit/'.$data->id;
+}else{ echo 'add'; }
+?>" method="POST" enctype="multipart/form-data" id="target">
 <input type="hidden" name="_token" value="{{csrf_token()}}" />
 <div class="text-right mb-3">
     <button type="reset" class="btn-warning mr-2"><i class="fas fa-arrow-left"></i> Back</button>
@@ -132,7 +137,7 @@
             <div class="card-body">
                 <div class="file-upload">
                     <div class="file-upload-content" onclick="$('.file-upload-input').trigger( 'click' )">
-                        <img class="file-upload-image" src="data/product/300/{{ isset($data) ? $data->img : 'no_image.jpg' }}" />
+                        <img class="file-upload-image" src="{{ isset($data) ? 'data/product/300/'.$data->img : 'data/no_image.jpg' }}" />
                     </div>
                     <div class="image-upload-wrap">
                         <input name="img" class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />

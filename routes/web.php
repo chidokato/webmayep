@@ -16,47 +16,54 @@ Route::group(['prefix'=>'admin','middleware'=>'adminlogin'],function(){
 		Route::get('add','usercontroller@getadd')->middleware('can:superadmin');
 		Route::post('add','usercontroller@postadd');
 		Route::get('delete/{id}','usercontroller@getdelete')->middleware('can:superadmin');
+		Route::post('search','usercontroller@search');
+		Route::get('profile/{id}','usercontroller@profile');
+		Route::get('alerts/{id}','usercontroller@alerts');
 
-	});
-	Route::group(['prefix'=>'profile'],function(){
-		Route::get('list','c_profile@getlist');
-		Route::get('update/{id}','ajaxcontroller@updateprofile');
-		Route::post('edit/{id}','c_profile@postedit');
 	});
 	Route::group(['prefix'=>'category'],function(){
 		Route::get('list','c_category@getlist');
 		Route::get('add','c_category@getadd');
-		Route::get('double/{id}','c_category@double');
 		Route::post('add','c_category@postadd');
 		Route::get('edit/{id}','c_category@getedit');
+		Route::get('double/{id}','c_category@double');
 		Route::post('edit/{id}','c_category@postedit');
 		Route::get('delete/{id}','c_category@getdelete');
 		Route::post('delete_all','c_category@delete_all');
+		Route::post('search','c_category@search');
 	});
 	Route::group(['prefix'=>'product'],function(){
 		Route::get('list','c_product@getlist');
 		Route::get('add','c_product@getadd');
 		Route::post('add','c_product@postadd');
-		Route::post('delall','c_product@delall');
 		Route::get('edit/{id}','c_product@getedit');
+		Route::get('double/{id}','c_product@double');
 		Route::post('edit/{id}','c_product@postedit');
 		Route::get('delete/{id}','c_product@getdelete');
-		Route::get('del/{id}/{imid}','c_product@delimages');
 		Route::post('delete_all','c_product@delete_all');
+		Route::post('search','c_product@search');
 	});
 	Route::group(['prefix'=>'news'],function(){
 		Route::get('list','c_news@getlist');
 		Route::get('add','c_news@getadd');
 		Route::post('add','c_news@postadd');
 		Route::get('edit/{id}','c_news@getedit');
+		Route::get('double/{id}','c_news@double');
 		Route::post('edit/{id}','c_news@postedit');
 		Route::get('delete/{id}','c_news@getdelete');
+		Route::post('delete_all','c_news@delete_all');
+		Route::post('search','c_news@search');
 	});
 	Route::group(['prefix'=>'themes'],function(){
+		Route::get('list','c_themes@getlist');
+		Route::get('add','c_themes@getadd');
 		Route::post('add','c_themes@postadd');
 		Route::get('edit/{id}','c_themes@getedit');
+		Route::get('double/{id}','c_themes@double');
 		Route::post('edit/{id}','c_themes@postedit');
 		Route::get('delete/{id}','c_themes@getdelete');
+		Route::post('delete_all','c_themes@delete_all');
+		Route::post('search','c_themes@search');
 	});
 	Route::group(['prefix'=>'slider'],function(){
 		Route::get('list','c_slider@getlist');

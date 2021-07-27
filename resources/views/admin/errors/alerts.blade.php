@@ -15,7 +15,7 @@
     </div>
 	@endforeach
 @endif
-@if(session('Errors'))
+@if(session('Error'))
     <div id="hidden" class="alert alert-custom alert-light-danger fade show mb-5" role="alert">
         <div class="alert-icon">
             <i class="flaticon-warning"></i>

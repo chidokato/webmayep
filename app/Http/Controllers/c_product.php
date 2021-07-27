@@ -24,6 +24,30 @@ class c_product extends Controller
         ]);
     }
 
+    public function search(Request $Request)
+    {
+        $datefilter[] = '';
+        $articles = articles::where('sort_by',1)->orderBy('id','desc')->where('id','!=' , 0);
+        if($Request->key){
+            $articles->where('name','like',"%$Request->key%");
+        }
+        if(isset($Request->datefilter)){
+            $datefilter = explode(" - ", $Request->datefilter);
+            $day1 = date('Y-m-d',strtotime($datefilter[0]));
+            $day2 = date('Y-m-d',strtotime($datefilter[1]));
+            // $articles->whereBetween('created_at', [$day1, $day2]);
+            $articles->whereDate('created_at','>=', $day1)->whereDate('created_at','<=', $day2);
+        }
+        $articles = $articles->paginate($Request->paginate);
+
+        return view('admin.product.list',[
+            'product'=>$articles,
+            'key'=>$Request->key,
+            'datefilter'=>$Request->datefilter,
+            'paginate'=>$Request->paginate,
+        ]);
+    }
+
     public function getadd()
     {
         $category = category::where('sort_by',1)->orderBy('id','desc')->get();
@@ -102,6 +126,25 @@ class c_product extends Controller
         return redirect('admin/product/list')->with('Alerts','Thành công');
     }
 
+    public function double($id)
+    {
+        $data = articles::findOrFail($id);
+        $seo = seo::findOrFail($data['seo_id']);
+        $category = category::where('sort_by',1)->orderBy('id','desc')->get();
+        $mausac = mausac::orderBy('id','desc')->get();
+        $form = form::orderBy('id','desc')->get();
+        $size = size::orderBy('id','desc')->get();
+        $double = 'double';
+        return view('admin.product.addedit',[
+            'data'=>$data,
+            'category'=>$category,
+            'seo'=>$seo,
+            'mausac'=>$mausac,
+            'form'=>$form,
+            'size'=>$size,
+            'double'=>$double,
+        ]);
+    }
     public function getedit($id)
     {
         $data = articles::findOrFail($id);
