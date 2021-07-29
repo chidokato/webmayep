@@ -18,9 +18,9 @@
         <div class="card shadow mb-4">
             <div class="card-header d-flex flex-row align-items-center justify-content-between">
                 <ul class="nav">
-                    <li><a class="active font-weight-bold text-primary" data-toggle="tab" href="#home">INFOMATION</a></li>
-                    <li><a class="font-weight-bold text-primary" data-toggle="tab" href="#menu1">SOCIAL</a></li>
-                    <li><a class="font-weight-bold text-primary" data-toggle="tab" href="#menu2">SEO OPTION</a></li>
+                    <li><a class="active font-weight-bold text-primary" data-toggle="tab" href="#home">Thông tin cơ bản</a></li>
+                    <li><a class="font-weight-bold text-primary" data-toggle="tab" href="#menu1">Mạng xã hội</a></li>
+                    <li><a class="font-weight-bold text-primary" data-toggle="tab" href="#menu2">Cấu hình SEO</a></li>
                 </ul>
             </div>
             <div class="card-body">

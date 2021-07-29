@@ -39,7 +39,8 @@
 <meta property="article:author" content="admin" />
 
 <!-- ================= Style ================== --> 
-<link href="frontend/acore/core.css" rel="stylesheet" />
+<link href="templates/acore/core.css" rel="stylesheet" />
+<link rel="icon" href="uploads/images/he-thong/favicon.png"  type="image/png" sizes="30x30">
 <link href="frontend/fonts/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" />
 <link href="frontend/uikit/css/uikit.modify.css" rel="stylesheet" />
 <link href="frontend/library/css/reset.css" rel="stylesheet" />
@@ -50,7 +51,7 @@
 <script src="frontend/library/js/jquery.js"></script>
 <script src="frontend/uikit/js/uikit.min.js"></script>
 <link href="frontend/custom.css" rel="stylesheet" />
-<link href="frontend/hotline.css" rel="stylesheet" />
+<link href="frontend/responsive.css" rel="stylesheet" />
 <!-- ================= js ================== --> 
 
 @yield('css')

@@ -5,7 +5,7 @@
 .logo img{float: left; height: 60px; margin: 5px;}
 .main-nav>.main-menu>li>a{padding: 26px 15px; font-weight: bold;}
 
-.header1 .main-nav>.main-menu>li>a{padding: 12px 20px;}
+.header1 .main-nav>.main-menu>li>a{padding: 12px 30px;}
 /*end header*/
 
 .home-title{text-align: center; margin-bottom: 50px;padding-top: 50px;position: relative;}
@@ -44,7 +44,7 @@
 .tab button:hover {background-color: #ddd;}
 .tab button.active {background-color: #ccc;}
 .tabcontent {display: none;padding: 6px 12px;-webkit-animation: fadeEffect 1s;animation: fadeEffect 1s;}
-.breadcrumb {margin: 0;margin-top: 20px;}
+.breadcrumb {margin: 0;margin-top: 10px;}
 .line{position: absolute;width: 80%;height: 1px;background: #000;top: 80%;left: 10%;}
 
 /*section3*/
@@ -54,11 +54,34 @@
 /*section3*/
 
 /*section6*/
-.section6 .thumb a{ border-radius: 1000px; border: 9px solid #0a5597; }
 .section6 h3{ text-align: center; margin-top: 10px; font-size: 1.4rem;  }
-/*section6*/ 
+.section6{margin-top: 50px;}
+/*section6*/
 
+.section3 {
+    background: #dddddd3b;
+    margin-top: 50px;
+}
+.section7{
+  background: #dddddd3b;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.category-news{ ; }
+.category-news .article .thumb {width: 180px;}
+.category-news .article .image{ height: 120px; }
+.sidebar_new .uk-clearfix{ display: flex; margin-bottom: 10px !important }
+.sidebar_new .uk-clearfix .thumb{ margin-right: 10px; width: 30%; }
+.sidebar_new .uk-clearfix .infor{ width: 70%; }
+.sidebar_new .uk-clearfix .infor a:hover{ text-decoration: underline; }
 
+.sticky{position: sticky; top: 70px;}
+.uk-slider img {
+    pointer-events: none;
+    height: 228px;
+    width: 100%;
+}
+.list-product .thumb img{height: 228px; width: 100%;}
 
 @-webkit-keyframes fadeEffect {
   from {opacity: 0;}
@@ -69,3 +92,12 @@ from {opacity: 0;}
 to {opacity: 1;}
 }
 
+.border_radius .thumb{text-align: center;}
+.border_radius img{height: 300px; width: 300px; border-radius: 1000px; border: 10px solid #088e2d; }
+.bannerhomes{padding: 80px;}
+.bannerhomes p{text-align: center; font-size: 3rem; color: #fff; font-weight: bold;}
+.doi_tac img{height: auto ;}
+.uk-link, a {color: #088e2d;}
+.iteam .infor{ padding: 10px 5px; }
+.sidebar_new .thumb img{height: 63px;}
+.sidebar_new .title{font-size: 1rem;}

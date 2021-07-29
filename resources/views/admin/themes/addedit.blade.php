@@ -49,7 +49,9 @@ if(isset($data)){
                             <select name="note" class="form-control">
                                 <option <?php if(isset($data) && $data->note == 'logo'){echo "selected";} ?> value="logo">logo</option>
                                 <option <?php if(isset($data) && $data->note == 'logo ân bản'){echo "selected";} ?> value="logo ân bản">logo ân bản</option>
-                                <option <?php if(isset($data) && $data->note == 'slider'){echo "selected";} ?> value="slider">slider</option>
+                                <option <?php if(isset($data) && $data->note == 'Slider'){echo "selected";} ?> value="Slider">slider</option>
+                                <option <?php if(isset($data) && $data->note == 'Banner'){echo "selected";} ?> value="Banner">Banner</option>
+                                <option <?php if(isset($data) && $data->note == 'Đối tác'){echo "selected";} ?> value="Đối tác">Đối tác</option>
                             </select>
                         </div>
                         <div class="form-group">

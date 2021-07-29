@@ -167,8 +167,10 @@ Route::get('sitemap.xml','c_frontend@sitemap');
 Route::get('wishlist','c_frontend@wishlist');
 Route::get('cart','c_frontend@cart');
 Route::get('my-account','c_frontend@myaccount');
+
 Route::get('{curl}','c_frontend@category');
 Route::get('{curl}/{arurl}','c_frontend@articles');
+
 Route::POST('dang-ky','c_frontend@dangky');
 Route::POST('search','c_frontend@post_search');
 // web may ep

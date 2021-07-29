@@ -13,24 +13,32 @@ class c_frontend extends Controller
     {
         $head_logo = themes::where('id',1)->first();
         $head_logo_trang = themes::where('id',2)->first();
+        $doi_tac = themes::where('note','Đối tác')->get();
         $head_setting = setting::where('id',1)->first();
-        $category = category::where('status','true')->where('parent', 0)->orderBy('view','asc')->get();
+        $head_category = category::where('status','true')->where('parent', 0)->orderBy('view','asc')->get();
+        $news_hits = articles::where('sort_by',2)->where('status','true')->orderBy('hits','desc')->paginate(10);
 
         view()->share( [
             'head_logo'=>$head_logo,
             'head_logo_trang'=>$head_logo_trang,
+            'doi_tac'=>$doi_tac,
             'head_setting'=>$head_setting,
-            'category'=>$category,
+            'head_category'=>$head_category,
+            'news_hits'=>$news_hits,
         ]);
     }
 
     public function home()
     {
         $articles = articles::where('sort_by',1)->orderBy('id','desc')->paginate(30);
+        $articles_news = articles::where('sort_by',2)->orderBy('id','desc')->paginate(30);
         $slider = themes::where('note','slider')->orderBy('id','desc')->get();
+        $bannerhomes = themes::where('note','Banner')->first();
         return view('pages.home',[
             'articles' => $articles,
+            'articles_news' => $articles_news,
             'slider' => $slider,
+            'bannerhomes' => $bannerhomes,
         ]);
     }
 
@@ -46,6 +54,20 @@ class c_frontend extends Controller
             ])->header('Content-Type', 'text/xml');
     }
 
+    // public function about()
+    // {
+    //     $category = category::where('slug','gioi-thieu')->first();
+    //     return view('pages.about', [
+    //         'data' => $category,
+    //     ]);
+    // }
+    // public function contact()
+    // {
+    //     $category = category::where('slug','lien-he')->first();
+    //     return view('pages.contact', [
+    //         'data' => $category,
+    //     ]);
+    // }
     public function wishlist()
     {
         // $category = category::where('slug',$curl)->first();
@@ -65,8 +87,8 @@ class c_frontend extends Controller
     public function category($curl)
     {
         $category = category::where('slug',$curl)->first();
-        if ($curl=='gioi-thieu') { return view('pages.about',['category'=>$category]); }
-        if ($curl=='lien-he') { return view('pages.contact',['category'=>$category]); }
+        if ($curl=='gioi-thieu') { return view('pages.about',['data'=>$category]); }
+        if ($curl=='lien-he') { return view('pages.contact',['data'=>$category]); }
         
         $cates = category::where('parent', $category["id"])->get();
         $array = [$category["id"]];
@@ -78,15 +100,16 @@ class c_frontend extends Controller
             }
         }
         if ($category->sort_by == 1) {
-            $product = product::where('status','true')->whereIn('category_id',$array)->orderBy('id','desc')->paginate(24);
-            return view('pages.product',['category'=>$category, 'product'=>$product]);
+            $articles = articles::where('status','true')->whereIn('category_id',$array)->orderBy('id','desc')->paginate(24);
+            return view('pages.product',['category'=>$category, 'articles'=>$articles]);
         }
         if ($category->sort_by == 2) {
             $articles = articles::where('status','true')->whereIn('category_id',$array)->orderBy('id','desc')->paginate(15);
             return view('pages.news',['category'=>$category, 'articles'=>$articles]);
         }
         if ($category->sort_by == 3) {
-            return view('pages.singlepage',['category'=>$category]);
+            $sitebar_cat = category::where('parent','120')->get();
+            return view('pages.singlepage',['category'=>$category, 'sitebar_cat'=>$sitebar_cat]);
         }
         
     }
@@ -104,10 +127,17 @@ class c_frontend extends Controller
             ->whereNotin('id',[$id])
             ->take(8)
             ->get();
-        return view('pages.articles',[
-            'articles'=>$articles,
-            'lienquan'=>$lienquan
-        ]);
+        if ($articles['sort_by']==1) {
+            return view('pages.articles_product',[
+                'articles'=>$articles,
+                'lienquan'=>$lienquan
+            ]);
+        }else{
+            return view('pages.articles',[
+                'articles'=>$articles,
+                'lienquan'=>$lienquan
+            ]);
+        }
     }
 
     public function post_search(Request $Request)
@@ -128,21 +158,21 @@ class c_frontend extends Controller
         ]);
     }
 
-    public function searchnews(Request $Request)
-    {
-        $key = $Request->key;
-        $news = news::where('status','true')->where('name','like',"%$key%")->orderBy('id','desc')->paginate(24);
-        return view('pages.search',['news'=>$news, 'key'=>$key]);
-    }
+    // public function searchnews(Request $Request)
+    // {
+    //     $key = $Request->key;
+    //     $news = news::where('status','true')->where('name','like',"%$key%")->orderBy('id','desc')->paginate(24);
+    //     return view('pages.search',['news'=>$news, 'key'=>$key]);
+    // }
 
     
 
-    public function singlenews($curl,$nurl,$id)
-    {
-        $singlenews = news::where('id',$id)->first();
-        $tinlienquan = news::where('status','true')->where('cat_id',$singlenews['cat_id'])->whereNotin('id',[$id])->take(10)->get();
-        return view('pages.singlenews',['singlenews'=>$singlenews, 'tinlienquan'=>$tinlienquan]);
-    }
+    // public function singlenews($curl,$nurl)
+    // {
+    //     $singlenews = news::where('id',$id)->first();
+    //     $tinlienquan = news::where('status','true')->where('cat_id',$singlenews['cat_id'])->whereNotin('id',[$id])->take(10)->get();
+    //     return view('pages.singlenews',['singlenews'=>$singlenews, 'tinlienquan'=>$tinlienquan]);
+    // }
 
 	public function dangky(Request $Request)
     {

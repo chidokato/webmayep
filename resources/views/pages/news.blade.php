@@ -7,50 +7,55 @@
 @section('url'){{asset('').$category['slug']}}@endsection
 
 @section('content')
-<main class="container">
-  <div class="row">
-    <div class="col-md-8">
-      <div class="row infinite-scroll">
-        @foreach($articles as $val)
-        <div class="col-md-12">
-          <div class="row g-0 mb-4">
-            <div class="col-auto d-lg-block">
-              <img style="width: 88px" src="data/news/80/{{$val->img}}">
+<section id="body">
+  <div class="product-page" class="page-body">
+    <div class="breadcrumb">
+            <div class="uk-container uk-container-center customer-container">
+                <ul class="uk-breadcrumb">
+                    <li class="uk-active"><a href="{{asset('')}}" title="Trang chủ"><i class="fa fa-home"></i> Trang chủ</a></li>
+                    <li>{{$category->name}}</li>
+                </ul>
             </div>
-            <div class="col d-flex flex-column position-static iteam">
-              <h2 class="mb-0 title"><a href="{{$val->category->slug}}/{{$val->slug}}">{{$val->name}}</a></h2>
-              <div class="link text-muted">
-                <span>{{$val->user->name}}</span>
-                <span>{{date('d/m/Y',strtotime($val->created_at))}}</span>
-                <span>{{$val->hits}}</span>
-              </div>
-              <p class="card-text mb-auto description">{{$val->detail}}</p>
-            </div>
-          </div>
         </div>
-        @endforeach
-        {{$articles->links()}}
+    <div class="uk-container uk-container-center customer-container">
+      <div class="uk-grid ">
+          <div class="uk-width-large-3-4">
+              <section class="artcatalogue">
+                  <section class="panel-body">
+                      <ul class="uk-list list-article">
+                        @foreach($articles as $val)
+                        <li class="category-news">
+                          <article class="article uk-clearfix">
+                              <div class="thumb img-flash">
+                                  <a class="image img-cover" href="{{$val->category->slug}}/{{$val->slug}}"><img src="data/news/300/{{$val->img}}" alt=""></a>
+                              </div>
+                              <div class="info">
+                                  <h2 class="title"><a href="{{$val->category->slug}}/{{$val->slug}}">{{$val->name}}</a></h2>
+                                  <div class="meta">
+                                      <i class="fa fa-user"></i> {{$val->user->name}}
+                                      <i class="fa fa-clock-o"></i> {{date('d/m/Y',strtotime($val->created_at))}}
+                                      <i class="fa fa-folder-open"></i> {{$val->category->name}}
+                                      <i class="fa fa-eye"></i> {{$val->hits}} view
+                                  </div>
+                                  <div class="description lib-line-4">{{$val->detail}}</div>
+                              </div>
+                          </article><!-- .article-1 -->
+                        </li>
+                        @endforeach
+                      </ul><!-- .list-article -->
+                  </section><!-- .panel-body -->
+              </section>
+          </div><!-- .uk-width-larg-3-4 -->
+          <div class="uk-width-large-1-4 uk-visible-large">
+              <aside class="aside">
+                  @include('layout.sidebar') 
+              </aside>
+          </div>        
       </div>
     </div>
+  </div><!-- .uk-container -->
+</section>
 
-    <div class="col-md-4">
-      <div class="position-sticky" style="top: 4rem;">
-        <div class="p-4 mb-3 bg-light rounded">
-          <h4 class="fst-italic">About</h4>
-          <p class="mb-0">Customize this section to tell your visitors a little bit about your publication, writers, content, or something else entirely. Totally up to you.</p>
-        </div>
+@include('layout.bottom')
 
-        <div class="p-4">
-          <h4 class="fst-italic">Archives</h4>
-          <ol class="list-unstyled mb-0">
-            <li><a href="#">March 2021</a></li>
-            <li><a href="#">February 2021</a></li>
-            
-          </ol>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</main>
 @endsection

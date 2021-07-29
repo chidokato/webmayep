@@ -44,19 +44,19 @@ if(isset($data)){
                         </div>
                     </div>
                     
-                    <div class="col-md-12">
+                    <!-- <div class="col-md-12">
                         <div class="form-group">
                             <label>Mô tả ngắn</label>
                             <textarea rows="3" name="detail" class="form-control">{{ isset($data) ? $data->detail : '' }}</textarea>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-12">
                         <div class="tab">
                             <button type="button" class="tablinks active" onclick="openCity(event, 'London')">Thông số kỹ thuật</button>
                             <button type="button" class="tablinks" onclick="openCity(event, 'Paris')">Nội dung chi tết</button>
                         </div>
                         <div id="London" class="tabcontent" style="display: block;">
-                            <textarea name="content" class="form-control ckeditor" id="ckeditor">{{ isset($data) ? $data->content : '' }}</textarea>
+                            <textarea name="detail" class="form-control ckeditor" id="ckeditor">{{ isset($data) ? $data->detail : '' }}</textarea>
                         </div>
                         <div id="Paris" class="tabcontent">
                             <textarea name="content" class="form-control ckeditor1" id="ckeditor1">{{ isset($data) ? $data->content : '' }}</textarea>
@@ -112,10 +112,10 @@ if(isset($data)){
                     </select>
                 </div> -->
                 
-                <!-- <div class="form-group">
+                <div class="form-group">
                     <label>Number</label>
-                    <input value="{{ isset($data->product->number) ? $data->product->number : '' }}" type="text" name="number" class="form-control" placeholder="...">
-                </div> -->
+                    <input value="{{ isset($data->product->number) ? $data->product->number : '' }}" type="number" name="number" class="form-control" placeholder="...">
+                </div>
                 <div class="form-group">
                     <label>Giá bán</label>
                     <input value="{{ isset($data->product->price) ? $data->product->price : '' }}" type="number" name="price" class="form-control" placeholder="...">
@@ -160,7 +160,7 @@ if(isset($data)){
                 <div class="row detail-img">
                     @foreach($data->images as $val)
                     <div class="col-md-6" id="detail_img">
-                        <img src="data/images/100/{{$val->img}}">
+                        <img src="data/product/80/{{$val->img}}">
                         <button type="button" id="del_img_detail"> Xóa ảnh </button>
                         <input type="hidden" name="id_img_detail" id="id_img_detail" value="{{$val->id}}" />
                     </div>

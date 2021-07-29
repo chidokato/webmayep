@@ -107,9 +107,9 @@ class c_ajax extends Controller
     {
         if(Request::ajax()){
             $images = images::find($id);
-            if(File::exists('data/images/'.$images->img)) {
-                File::delete('data/images/'.$images->img);
-                File::delete('data/images/100/'.$images->img);
+            if(File::exists('data/product/'.$images->img)) {
+                File::delete('data/product/'.$images->img);
+                File::delete('data/product/80/'.$images->img);
             }
             $images->delete();
         }

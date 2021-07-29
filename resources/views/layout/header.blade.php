@@ -1,11 +1,12 @@
 <?php use App\category; ?>
 <header class="pc-header uk-visible-large header1">
+  <div class="uk-container uk-container-center">
   <section class="topbar">
     <div class="uk-container uk-container-center">
       <div class="uk-flex uk-flex-middle uk-flex-space-between container">
         <ul class="uk-list uk-flex uk-flex-middle hd-contact">
-          <li class="location"><span><i class="fa fa-map-marker"></i> Văn Phòng Showroom tại: Tầng 3 - 91 Nguyễn Khang - Cầu Giấy - Hà Nội</span></li>
-          <li class="email"><span><i class="fa fa-envelope"></i> <a href="mailto:Minhtk1730@gmail.com" title="Email">Minhtk1730@gmail.com</a></span></li>
+          <li class="location"><span><i class="fa fa-map-marker"></i> {{$head_setting->address}} </span></li>
+          <li class="email"><span><i class="fa fa-envelope"></i> <a href="{{$head_setting->email}}" title="Email">{{$head_setting->email}}</a></span></li>
         </ul>
         <div class="page-social">
           <ul class="uk-list uk-clearfix">
@@ -26,7 +27,7 @@
     <div class="uk-container uk-container-center">
       <div class="uk-flex uk-flex-middle uk-flex-space-between container">
         <div class="logo" itemscope="" itemtype="http://schema.org/Hotel">
-          <a itemprop="url" href="https://duyvillas.com/" title="logo">
+          <a itemprop="url" href="{{asset('')}}" title="logo">
             <img src="data/logo.png" style="height: 80px;" alt="logo" itemprop="logo">
           </a>
           <span class="uk-hidden">logo</span>
@@ -41,7 +42,7 @@
         </div>
         <div class="hd-hotline">
         <span class="label">Hotline</span>
-        <a class="number" href="tel:0904 558 318" title="Hotline">0904 558 318</a>
+        <a class="number" href="tel:{{$head_setting->hotline}}" title="Hotline">{{$head_setting->hotline}}</a>
         </div>
       </div><!-- .container -->
     </div>
@@ -52,7 +53,7 @@
         <nav class="main-nav">
           <ul class="uk-navbar-nav uk-clearfix main-menu float_left">
             <li class="active"> <a href="{{asset('')}}">Trang chủ</a> </li>
-            @foreach($category as $val)
+            @foreach($head_category as $val)
             <li> <a href="{{$val->slug}}">{{$val->name}}</a>
               <?php $sub_category = category::where('status','true')->where('parent', $val->id)->orderBy('view','asc')->get(); ?>
               @if(count($sub_category) > 0)
@@ -71,6 +72,7 @@
       </div>
     </section>
   </div><!-- .lower -->
+</div>
 </header>
 
 <header class="mobile-header uk-hidden-large">
@@ -79,9 +81,9 @@
             <span>Menu</span>
         </a>
         <div class="logo"><a href="#" title="Logo"><img src="uploads/images/he-thong/logo.png" alt="Logo"></a></div>
-        <a class="mobile-hotline" href="tel: 0911388799" title="Hotline">
+        <a class="mobile-hotline" href="tel: {{$head_setting->hotline}}" title="Hotline">
             <span class="label">Hotline: </span>
-            <span class="value">0911388799</span>
+            <span class="value">{{$head_setting->hotline}}</span>
         </a>
     </section><!-- .upper -->
     <section class="lower">

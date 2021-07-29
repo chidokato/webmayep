@@ -114,9 +114,9 @@ class c_product extends Controller
                 if(isset($file)){
                     $images->articles_id = $articles->id;
                     $filename = $file->getClientOriginalName();
-                    while(file_exists("data/images/".$filename)){ $filename = str_random(4)."_".$filename; }
-                    $img = Image::make($file)->resize(1000, 600, function ($constraint) {$constraint->aspectRatio();})->save(public_path('data/images/'.$filename));
-                    $img = Image::make($file)->resize(100, 80, function ($constraint) {$constraint->aspectRatio();})->save(public_path('data/images/100/'.$filename));
+                    while(file_exists("data/product/".$filename)){ $filename = str_random(4)."_".$filename; }
+                    $img = Image::make($file)->resize(1000, 600, function ($constraint) {$constraint->aspectRatio();})->save(public_path('data/product/'.$filename));
+                    $img = Image::make($file)->resize(80, 80, function ($constraint) {$constraint->aspectRatio();})->save(public_path('data/product/80/'.$filename));
                     $images->img = $filename;
                     $images->save();
                 }
@@ -217,9 +217,9 @@ class c_product extends Controller
                 if(isset($file)){
                     $images->articles_id = $articles->id;
                     $filename = $file->getClientOriginalName();
-                    while(file_exists("data/images/".$filename)){ $filename = str_random(4)."_".$filename; }
-                    $img = Image::make($file)->resize(1000, 600, function ($constraint) {$constraint->aspectRatio();})->save(public_path('data/images/'.$filename));
-                    $img = Image::make($file)->resize(100, 80, function ($constraint) {$constraint->aspectRatio();})->save(public_path('data/images/100/'.$filename));
+                    while(file_exists("data/product/".$filename)){ $filename = str_random(4)."_".$filename; }
+                    $img = Image::make($file)->resize(1000, 600, function ($constraint) {$constraint->aspectRatio();})->save(public_path('data/product/'.$filename));
+                    $img = Image::make($file)->resize(80, 80, function ($constraint) {$constraint->aspectRatio();})->save(public_path('data/product/80/'.$filename));
                     $images->img = $filename;
                     $images->save();
                 }

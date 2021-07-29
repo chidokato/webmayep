@@ -102,7 +102,7 @@
     <script type="text/javascript">
         $(document).ready(function() { $('.select2').select2({ placeholder: '...' }); });
     </script>
-    <script src="admin_asset/js/js.js"></script>
+    
 
     <!-- date -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -128,6 +128,8 @@
 
     <!-- zoom ảnh -->
     <script src="admin_asset/zoom/zoom.js"></script>
+    
+    <script src="admin_asset/js/js.js"></script>
     
 </body>
 </html>
