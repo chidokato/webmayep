@@ -5,6 +5,7 @@ use App\themes;
 use App\category;
 use App\setting;
 use App\articles;
+use App\user;
 use Mail;
 
 class c_frontend extends Controller
